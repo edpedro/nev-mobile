@@ -4,7 +4,7 @@ import styles from './styles'
 
 import User from '../../Components/User'
 import Balance from '../../Components/Balance';
-import Card from '../../Components/Card';
+import CardComponent from '../../Components/CardComponent';
 import TransComponents from '../../Components/TransComponents'
 
 const DATA = [{id: 1}]
@@ -21,7 +21,7 @@ export default function Home() {
           <FlatList         
             data={DATA}
             renderItem={({item}) => (
-              <Card />
+              <CardComponent />
             )}
             horizontal={true}
             scrollEnabled

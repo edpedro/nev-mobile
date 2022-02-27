@@ -2,7 +2,7 @@ import { Text, View, TouchableOpacity } from "react-native";
 
 import styles from './styles'
 
-export default function Card(){
+export default function CardComponent(){
   return (
     <View style={styles.container}>
       <View style={styles.contentHeader}>

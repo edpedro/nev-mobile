@@ -2,9 +2,9 @@ import { Text } from 'react-native';
 
 import styles from './styles'
 
-export default function Transaction() {
+export default function Acount() {
 
   return (
-   <Text>Transaction</Text>
+   <Text>Acount</Text>
   );
 }
