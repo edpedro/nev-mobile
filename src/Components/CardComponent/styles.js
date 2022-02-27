@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {  
-    width: 240,
+    width: 260,
     height: 130,
     backgroundColor: '#058373',
     borderRadius: 10,
@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     padding: 5,
+    marginTop: 5
   },
   headerTitle: {
     fontWeight: "bold",

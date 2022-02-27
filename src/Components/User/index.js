@@ -18,7 +18,7 @@ export default function User(){
         
       </View>
 
-      <MaterialIcons name="add-alert" size={34} color="#fff" />
+      <MaterialIcons name="add-alert" style={{marginRight: 10}} size={34} color="#fff" />
     </View>
   ) 
 }
