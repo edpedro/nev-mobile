@@ -1,11 +1,11 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import CustomTabBar from '../src/Components/CustomTabBar'
+import CustomTabBar from '../Components/CustomTabBar'
 
-import Home from '../src/screens/Home'
-import Card from '../src/screens/Card'
-import Transaction from '../src/screens/Transaction'
-import Acount from '../src/screens/Acount'
+import Home from '../screens/Home'
+import Card from '../screens/Card'
+import Transaction from '../screens/Transaction'
+import Acount from '../screens/Acount'
 
 const Tab = createBottomTabNavigator();
 
