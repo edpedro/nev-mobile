@@ -12,9 +12,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
-
-    backgroundColor: "#ffff",
-    shadowColor: "#000",
     shadowOffset:{
       width: 0,
       height: 12,
@@ -25,7 +22,7 @@ const styles = StyleSheet.create({
   },
   incomeTitle: {},
   incomeValue: {
-    fontWeight: "bold"
+    fontWeight: "bold", 
   },
   expense: {
     width: 100,
@@ -34,8 +31,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
 
-    backgroundColor: "#ffff",
-    shadowColor: "#000",
     shadowOffset:{
       width: 0,
       height: 12,
@@ -45,8 +40,7 @@ const styles = StyleSheet.create({
     elevation: 24,
   }, 
   expenseValue: {
-    fontWeight: "bold",
-    color: "#EC1C24",
+    fontWeight: "bold",    
   },
   ContentBalance: {
     width: 100,
@@ -55,8 +49,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
 
-    backgroundColor: "#ffff",
-    shadowColor: "#000",
     shadowOffset:{
       width: 0,
       height: 12,
@@ -66,8 +58,7 @@ const styles = StyleSheet.create({
     elevation: 24,
   },
   ContentBalanceValue: {
-    fontWeight: "bold",
-    color: "#058373",
+    fontWeight: "bold",  
   },
 })
 
