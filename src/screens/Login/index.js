@@ -31,7 +31,7 @@ export default function Login({ navigation }) {
       
         <TouchableOpacity>
           <Text style={styles.messageButtonText}>Cadastre-se</Text>
-      </TouchableOpacity>
+        </TouchableOpacity>
       </View>    
 
     </KeyboardAvoidingView>
