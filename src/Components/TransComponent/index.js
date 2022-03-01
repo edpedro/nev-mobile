@@ -4,7 +4,7 @@ import { FontAwesome, Entypo  } from '@expo/vector-icons';
 
 import styles from './styles'
 
-export default function TransComponents(){
+export default function TransComponent(){
   return (
     <View style={styles.container}>
 

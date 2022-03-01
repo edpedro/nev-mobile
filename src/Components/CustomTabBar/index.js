@@ -9,7 +9,7 @@ export default function CustomTabBar({ state, navigation,label}){
   function goTo(screen) {
     navigation.navigate(screen)
   }
-  console.log(state)
+  
   return(
     <View style={styles.container}>    
       <TouchableOpacity style={styles.tabItem} onPress={() => goTo("Home")} >
