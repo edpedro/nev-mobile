@@ -19,7 +19,8 @@ export default function Register() {
     behavior={Platform.OS === "ios" ? "padding" : "height"}
     style={styles.container}
     >   
-     <Text style={styles.title}>Controle Financeiro</Text>
+    <View style={styles.content}>
+      <Text style={styles.title}>Controle Financeiro</Text>
 
      <Input title="Nome"  name={name} setData={setName}/>
      <Input title="Email" name={email} setData={setEmail}/> 
@@ -29,13 +30,15 @@ export default function Register() {
        <Text style={styles.textButton}>Cadastrar</Text>
      </TouchableOpacity>
 
-    <View style={styles.messageView}>
-      <Text style={styles.messageText}>Já possuir um conta?</Text>
-     
-      <TouchableOpacity>
-        <Text style={styles.messageButtonText}>Login</Text>
-     </TouchableOpacity>
-    </View>    
+      <View style={styles.messageView}>
+        <Text style={styles.messageText}>Já possuir um conta?</Text>
+      
+        <TouchableOpacity>
+          <Text style={styles.messageButtonText}>Login</Text>
+      </TouchableOpacity>
+      </View>    
+    </View>
+    
  
   </KeyboardAvoidingView>
   );

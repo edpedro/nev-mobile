@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import DetailCard from '../screens/DetailCard'
+import RegisterCard from '../screens/RegisterCard'
 
 import MenuTabs from './MenuTabs';
 
@@ -10,8 +10,8 @@ const Stack = createNativeStackNavigator()
 const Routes = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Login' >
-        <Stack.Screen options={{ headerShown: false }} name="Login" component={DetailCard} />
+      <Stack.Navigator initialRouteName='RegisterCard' >
+        <Stack.Screen options={{ headerShown: false }} name="RegisterCard" component={RegisterCard} />
         <Stack.Screen options={{ headerShown: false }} name="Home" component={MenuTabs} />       
       </Stack.Navigator>
     </NavigationContainer>

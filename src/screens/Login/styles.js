@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#058373',
     alignItems: 'center',    
   },
+  content:{
+    alignItems: "center"
+  },
   title: {
     marginTop: 112,
     marginBottom: 40,
@@ -15,7 +18,7 @@ const styles = StyleSheet.create({
   },
   textButton:{
    fontSize: 20,
-   fontWeight: "bold"
+   fontWeight: "bold", 
   },
   button:{
     justifyContent: "center",

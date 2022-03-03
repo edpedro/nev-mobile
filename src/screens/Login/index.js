@@ -17,6 +17,7 @@ export default function Login({ navigation }) {
     behavior={Platform.OS === "ios" ? "padding" : "height"}
     style={styles.container}
     > 
+    <View style={styles.content}>
       <Text style={styles.title}>Controle Financeiro</Text>
 
       <Input title="Email" name={email} setData={setEmail}/> 
@@ -33,6 +34,8 @@ export default function Login({ navigation }) {
           <Text style={styles.messageButtonText}>Cadastre-se</Text>
         </TouchableOpacity>
       </View>    
+    </View>
+   
 
     </KeyboardAvoidingView>
    
