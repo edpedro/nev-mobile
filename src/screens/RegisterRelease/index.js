@@ -7,18 +7,30 @@ import Input from '../../Components/Input'
 
 import styles from './styles'
 
+const incomeExpense = [{value: "receita"}, { value: "despesa"}]
+const acountCard = [{value: "cartao"}, { value: "conta"}]
+
 export default function RegisterRelease(){
-  const [name, setName] = useState("")
-  const [limit, setLimit] = useState("")
-  const [close, setClose] = useState("")
-  const [win, setWin] = useState("")
-  const [bank, setBank] = useState("")
+  const [description, setDescription] = useState("")
+  const [value, setValue] = useState("")
+  const [data, setData] = useState("")
+  const [category, setCategory] = useState("")
+  const [operation, setOperation] = useState("")
+  const [creditCard, setCreditCard] = useState("")
+  const [type, setType] = useState("")
 
   function handleSubmit(){
     console.log("email", name)
     console.log("password", password)
   }
 
+  function handleIncomeExpense(value) {
+    setType(value)
+  }
+  function handleAcountCard(value) {
+    setOperation(value)
+  }
+  
   return (
     <KeyboardAvoidingView 
     behavior={Platform.OS === "ios" ? "padding" : "height"}   
@@ -28,32 +40,62 @@ export default function RegisterRelease(){
       <View style={styles.content}>
         <Text style={styles.title}>Cadastrar Lançamento</Text> 
         <View style={styles.grid}>
-          <TouchableOpacity style={styles.income}>
-            <AntDesign name="plus" size={24} color="#058373" />
-            <Text style={styles.incomeTitle}>Receita</Text>            
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.expense}> 
-            <AntDesign name="minus" size={24} color="#EC1C24" />
-            <Text style={styles.expenseTitle}>Despesa</Text>           
-          </TouchableOpacity>
+          {incomeExpense.map((item, key) => {           
+            return (
+              <TouchableOpacity 
+                key={key}
+                onPress={() => handleIncomeExpense(item.value)}
+                style={[
+                  item.value === "receita" ? styles.income : styles.expense, 
+                  item.value === type && styles.selectedType
+                ]}
+              >
+                <AntDesign 
+                  name={item.value === "receita" ? "plus": "minus"} 
+                  size={24}
+                  style={[{
+                    color: item.value === "receita" ? "#058373": "#EC1C24"}, 
+                    item.value === type && styles.selectedTypeIcon]}              
+                 />
+                  <Text style={[
+                    item.value === "receita" ? styles.incomeTitle : styles.expenseTitle, 
+                    item.value === type && styles.selectedTypeTitle]}
+                    >
+                    {item.value.charAt(0).toUpperCase() + item.value.slice(1)}
+                  </Text>            
+              </TouchableOpacity>
+            )
+          })}          
         </View>     
-        <Input title="Descrição" name={name} setData={setName}/>
-        <Input title="Valor" name={limit} setData={setLimit}/>
-        <Input title="Data" name={close} setData={setClose}/> 
+        <Input title="Descrição" name={description} setData={setDescription}/>
+        <Input title="Valor" name={value} setData={setValue}/>
+        <Input title="Data" name={data} setData={setData}/> 
 
         <Text style={styles.acountCardTitle}>Cartão/Conta</Text>
 
-        <View style={styles.acountCard}>          
-          <TouchableOpacity style={styles.card}>
-            <Entypo  name="credit-card" size={20} color="black" />
-            <Text style={styles.cardTitle}>Cartão</Text>            
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.account}> 
-            <MaterialIcons name="account-balance" size={20} color="black" />
-            <Text style={styles.accountTitle}>Conta</Text>           
-          </TouchableOpacity>
-        </View>         
-        <Input title="Categoria" name={bank} setData={setBank}/>
+        <View style={styles.acountCard}>
+          {acountCard.map((item, key) => {
+            return (
+              <TouchableOpacity 
+              key={key}
+              onPress={() => handleAcountCard(item.value)}
+              style={[styles.card, item.value === operation && styles.selectedOperation]}
+              >
+                {item.value === "cartao" 
+                  ?
+                  <Entypo  name="credit-card" size={20} color="black" />
+                  :
+                  <MaterialIcons name="account-balance" size={20} color="black" />
+                }                
+                <Text style={styles.cardTitle}>{item.value.charAt(0).toUpperCase() + item.value.slice(1)}</Text>            
+              </TouchableOpacity>
+            )
+          })}         
+        </View> 
+        {operation === "cartao" && 
+          <Input title="Bandeira" name={creditCard} setData={setCreditCard}/>
+        }        
+        <Input title="Categoria" name={category} setData={setCategory}/>
 
         <TouchableOpacity style={styles.button} onPress={() => handleSubmit()}>
           <Text style={styles.textButton}>Adicionar</Text>

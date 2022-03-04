@@ -15,19 +15,16 @@ export default function Acount(){
        <View style={styles.exitIcon}>
          <View style={styles.exit}>
           <TouchableOpacity>
-          <MaterialIcons name="exit-to-app" size={40} color="black" />
+            <MaterialIcons name="exit-to-app" size={40} color="black" />
+            <Text>Sair</Text>
           </TouchableOpacity>            
         </View>   
       </View> 
-              
-
-
         <View style={styles.goBack}>
           <Ionicons name="arrow-back" size={24} color="black" />
           <TouchableOpacity>
             <Text style={styles.goBackTitle}>Voltar</Text>
-          </TouchableOpacity>
-                    
+          </TouchableOpacity>                    
         </View>        
       </View>
     </View>

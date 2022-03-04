@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
     marginRight: 20
   },
   incomeTitle: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: "#000"
   },
   expense: {
     width: 100,
@@ -44,7 +45,8 @@ const styles = StyleSheet.create({
     marginLeft: 20
   },
   expenseTitle: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: "#000"
   },
   acountCardTitle:{  
     marginLeft: 12,
@@ -69,20 +71,7 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 10,
     fontWeight: "bold"
-  },
-  account: {
-    width: 60,
-    height: 40,
-    backgroundColor: "#fff",
-    borderRadius: 5,
-    justifyContent: "center",
-    alignItems: "center", 
-    marginTop: 10  
-  },
-  accountTitle: {
-    fontSize: 10,
-    fontWeight: "bold"
-  },
+  }, 
   textButton:{
     fontSize: 20,
     fontWeight: "bold"
@@ -92,7 +81,7 @@ const styles = StyleSheet.create({
      alignItems: "center",
     
      marginLeft: 80,
-     marginTop: 40,
+     marginTop: 10,
      width: 192,
      height: 58,
      borderRadius: 20,
@@ -107,6 +96,18 @@ const styles = StyleSheet.create({
      shadowRadius: 16.00,
      elevation: 24,
    },
+   selectedType: {
+     backgroundColor: "#81C3BA"
+   },
+   selectedTypeTitle:{
+    color: "#fff"
+   },
+   selectedTypeIcon: {
+     color: "#fff",
+   },
+   selectedOperation: {
+    backgroundColor: "#D8D8D8"
+   }
 });
 
 export default styles
