@@ -13,12 +13,12 @@ const Stack = createNativeStackNavigator();
 
 export function AuthStack() {
   return (
-    <Stack.Navigator initialRouteName='Home'>
+    <Stack.Navigator initialRouteName='Inicio'>
+      <Stack.Screen options={{ headerShown: false }} name="Inicio" component={MenuTabs} />
       <Stack.Screen options={{ headerShown: false }} name="RegisterCard" component={RegisterCard} />
       <Stack.Screen options={{ headerShown: false }} name="Detail" component={Detail} />
       <Stack.Screen options={{ headerShown: false }} name="DetailCard" component={DetailCard} />
-      <Stack.Screen options={{ headerShown: false }} name="RegisterRelease" component={RegisterRelease} />
-      <Stack.Screen options={{ headerShown: false }} name="Home" component={MenuTabs} />       
+      <Stack.Screen options={{ headerShown: false }} name="RegisterRelease" component={RegisterRelease} />             
     </Stack.Navigator>
   );
 }

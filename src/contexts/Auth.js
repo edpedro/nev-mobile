@@ -1,27 +1,28 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { Alert } from 'react-native'
+import { ToastAndroid } from 'react-native'
 
 import api from '../services/api'
 
 const AuthContext = createContext()
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState()
   const [isLoading, setIsLoading] = useState(true)
-
+  
   useEffect(() => {
     loadStorageData()
   }, [])
 
   async function loadStorageData(){
     const authData  = await AsyncStorage.getItem('@data')
-
+    
     if(authData){
       const data = JSON.parse(authData)
 
       setUser(data)
-    }
+      
+    }    
     setIsLoading(false)
   }
   
@@ -29,13 +30,20 @@ export function AuthProvider({ children }) {
     try {
       const { data } = await api.post('/sessions', user)
 
-      AsyncStorage.setItem('@data', JSON.stringify(data))
-      setUser(data)
-      setIsLoading(false)
-
-      Alert.alert("Logado")
+      setUser(data) 
+      AsyncStorage.setItem('@data', JSON.stringify(data))       
+      
+      ToastAndroid.showWithGravity(
+        "Login efetuado com sucesso",
+        ToastAndroid.SHORT,
+        ToastAndroid.TOP
+      )
     } catch (error) {
-      Alert.alert(error.message, "Tente novamente")
+      ToastAndroid.showWithGravity(
+        "Tente novamente",
+        ToastAndroid.SHORT,
+        ToastAndroid.TOP
+      )
     }
   }
 
@@ -52,6 +60,10 @@ export function AuthProvider({ children }) {
 }
 export function useAuth(){
   const context = useContext(AuthContext)
+
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
 
   return context
 }

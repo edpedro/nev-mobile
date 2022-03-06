@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   input: {    
     width: 335,
     height: 50,
-    borderRadius: 10,
+    borderRadius: 5,
     padding: 10, 
 
     backgroundColor: "#fff",
@@ -25,6 +25,11 @@ const styles = StyleSheet.create({
     shadowRadius: 6.68,
     elevation: 11,
   },
+  ErrorTitle: {
+    marginTop: 5, 
+    color: '#fff', 
+    fontSize: 10,    
+  }
 });
 
 export default styles
