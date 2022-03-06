@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Input from '../../Components/Input';
 
 import styles from './styles'
@@ -31,7 +31,7 @@ export default function Login({ navigation }) {
         <View style={styles.messageView}>
           <Text style={styles.messageText}>Ainda não possuir um conta?</Text>
         
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.replace("Register")}>
             <Text style={styles.messageButtonText}>Cadastre-se</Text>
           </TouchableOpacity>
         </View>    

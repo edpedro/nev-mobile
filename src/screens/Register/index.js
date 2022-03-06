@@ -4,7 +4,7 @@ import Input from '../../Components/Input';
 
 import styles from './styles'
 
-export default function Register() {
+export default function Register({ navigation }) {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -33,7 +33,7 @@ export default function Register() {
       <View style={styles.messageView}>
         <Text style={styles.messageText}>Já possuir um conta?</Text>
       
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.replace("Login")}>
           <Text style={styles.messageButtonText}>Login</Text>
       </TouchableOpacity>
       </View>    
