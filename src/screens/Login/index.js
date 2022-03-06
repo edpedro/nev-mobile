@@ -1,17 +1,24 @@
 import { useState } from 'react';
 import { View, Text, TouchableOpacity, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { useAuth } from '../../contexts/Auth'
+
+
 import Input from '../../Components/Input';
 
 import styles from './styles'
 
 export default function Login({ navigation }) {
+  const { handleLogin } = useAuth()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
   function handleSubmit(){
-    console.log("email", email)
-    console.log("password", password)
-  }
+    const data = {
+      email,
+      password
+    }
+    handleLogin(data)
+  } 
   return (
     <KeyboardAvoidingView 
     behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -24,7 +31,7 @@ export default function Login({ navigation }) {
         <Input title="Email" name={email} setData={setEmail}/> 
         <Input title="Senha" name={password} secure={true} setData={setPassword}/>  
 
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Home")}>
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
           <Text style={styles.textButton}>Entrar</Text>
         </TouchableOpacity>
 

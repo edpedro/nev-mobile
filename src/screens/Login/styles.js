@@ -4,13 +4,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#058373',
-    alignItems: 'center',    
+    justifyContent: "center"    
   },
   content:{
     alignItems: "center"
   },
-  title: {
-    marginTop: 112,
+  title: {   
     marginBottom: 40,
     fontSize: 28,
     fontWeight: 'bold',

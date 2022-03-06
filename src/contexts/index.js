@@ -1,5 +1,5 @@
 
-import AuthProvider from "./Auth"
+import { AuthProvider } from "./Auth"
 
 export default function AppProvider({ children }){
   return (
