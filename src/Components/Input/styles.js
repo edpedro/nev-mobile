@@ -9,8 +9,10 @@ const styles = StyleSheet.create({
     color: "#ffff",
     marginBottom: 5,
   },
-  input: {    
-    width: 335,
+  inputArea: {
+    flexDirection: 'row',
+    alignItems: "center",
+    width: '90%',
     height: 50,
     borderRadius: 5,
     padding: 10, 
@@ -24,6 +26,16 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.36,
     shadowRadius: 6.68,
     elevation: 11,
+  },
+  input: {  
+    width: '85%',
+    height: 50,   
+  },
+  icon:{
+    width: '15%',
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",   
   },
   ErrorTitle: {
     marginTop: 5, 

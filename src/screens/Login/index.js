@@ -12,6 +12,7 @@ export default function Login({ navigation }) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [errors, setErrors] = useState({})
+  const [hidePass, setHidePass] = useState(true)
 
   function validate(){
     Keyboard.dismiss()
@@ -55,6 +56,7 @@ export default function Login({ navigation }) {
           title="Email" 
           name={email} 
           setData={setEmail} 
+          iconName='mail'
           error={errors.email}
           autoCapitalize='none'
           onFocus={() => handleError(null, 'email')}
@@ -62,9 +64,11 @@ export default function Login({ navigation }) {
         <Input 
           title="Senha" 
           name={password} 
-          secure={true} 
+          secure={hidePass} 
           setData={setPassword} 
           error={errors.password}
+          iconName={hidePass ? "eye" : 'eye-off'}
+          setHidePass={setHidePass}
           autoCapitalize='none'
           onFocus={() => handleError(null, 'password')}
         />  
