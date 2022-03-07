@@ -47,13 +47,34 @@ export function AuthProvider({ children }) {
     }
   }
 
+  async function handleRegister(user) {   
+    try {
+      const { data } = await api.post('/users', user)
+
+      setUser(data) 
+      AsyncStorage.setItem('@data', JSON.stringify(data))       
+      
+      ToastAndroid.showWithGravity(
+        "Cadastro efetuado com sucesso",
+        ToastAndroid.SHORT,
+        ToastAndroid.TOP
+      )
+    } catch (error) {
+      ToastAndroid.showWithGravity(
+        "Tente novamente",
+        ToastAndroid.SHORT,
+        ToastAndroid.TOP
+      )
+    }
+  }
+
   function handleLogout() {
     setUser(undefined)
     AsyncStorage.removeItem('@data');
   } 
 
   return (
-    <AuthContext.Provider value={{ handleLogin, handleLogout, user, isLoading }}>
+    <AuthContext.Provider value={{ handleLogin, handleLogout, handleRegister, user, isLoading }}>
       {children}
     </AuthContext.Provider>
   )
