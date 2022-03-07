@@ -1,19 +1,31 @@
 import { View, Text, Image } from 'react-native'
-import { MaterialIcons, Feather } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
+
+import { useAuth } from '../../contexts/Auth'
 
 import styles from './styles'
 
 import userLogo from '../../assets/user.png'
 
 export default function User(){
+  const { user } = useAuth()  
+
+  const data = new Date
+  const curretData = 
+  String(data.getDate()).padStart(2, '0') 
+  + '/' + 
+  String(data.getMonth() + 1).padStart(2, '0')
+  
   return (
     <View style={styles.container}>
       <View style={styles.contentUser}>
         <Image source={userLogo} style={styles.logouSer}/> 
 
         <View style={styles.contentUserTitle}>
-          <Text style={styles.UserTitleData}>21/02</Text>
-          <Text style={styles.UserTitleName}>Eduardo pedro</Text>
+          <Text style={styles.UserTitleData}>{curretData}</Text>
+          <Text style={styles.UserTitleName}>
+            {user.user.name[0].toUpperCase() + user.user.name.substr(1)}
+          </Text>
         </View>
         
       </View>
