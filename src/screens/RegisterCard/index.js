@@ -28,12 +28,12 @@ export default function RegisterCard(){
       handleError("Por favor insira limite", 'limit')
       isValid = false
     }
-    if(!close){
-      handleError("Por favor insira dia fechar", 'close')
+    if(!close || String(close.length) <= 1){
+      handleError("Por favor insira dia fechar.. Ex 00", 'close')
       isValid = false
     }
-    if(!win){
-      handleError("Por favor insira dia vence", 'win')
+    if(!win || String(win.length) <= 1){
+      handleError("Por favor insira dia vence.. Ex 00", 'win')
       isValid = false
     }
     if(!bank){
@@ -54,21 +54,12 @@ export default function RegisterCard(){
       win,
       bank
     }
-      
+      // console.log(data)
   } 
 
   const handleError = (error, input) => {
     setErrors(prevState => ({...prevState, [input]: error}));
-  };
-
-
-  function handleSubmit(){
-    console.log("email", close)
-    console.log("password", win)
-  }
-
-  
-  console.log(bank)
+  };  
   return (
     <KeyboardAvoidingView 
     behavior={Platform.OS === "ios" ? "padding" : "height"}   
@@ -103,7 +94,7 @@ export default function RegisterCard(){
         />
         <Input 
           title="Vence dia" 
-          error={errors.close} 
+          error={errors.win} 
           maxLength={2} 
           keyboardType="numeric" 
           name={win} 
