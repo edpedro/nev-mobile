@@ -7,7 +7,7 @@ import { useAuth } from '../contexts/Auth'
 
 const Routes = () => {
   const { user, isLoading } = useAuth()
-
+ 
   if(isLoading){
     return (
       <Loading />

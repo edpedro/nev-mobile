@@ -13,7 +13,8 @@ const styles = StyleSheet.create({
   titleName:{
     fontSize: 30,
     color: "#fff",
-    fontWeight: "bold"
+    fontWeight: "bold",
+    marginRight: 20
   }, 
   content: { 
     flex: 1,
