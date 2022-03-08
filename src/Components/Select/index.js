@@ -6,7 +6,7 @@ import { Entypo } from '@expo/vector-icons';
 import styles from './styles'
 
 
-export default function Select({ title, text, onChangeSelect, options }){
+export default function Select({ title, text, onChangeSelect, options, error }){
   const [txt, setTxt] = useState(text)
   const [selectd, setSelectd] = useState("")
   const [modalVisible, setModalVisible] = useState(false)
@@ -62,10 +62,14 @@ export default function Select({ title, text, onChangeSelect, options }){
             keyExtractor={(item) => String(item)}
             renderItem={({item}) => renderOption(item)}
           />
-        </SafeAreaView>
-       
+        </SafeAreaView>       
        </Modal>
       </View>
+      {error && (
+        <Text style={styles.ErrorTitle}>
+          {error}
+        </Text>
+      )}   
     </View>
   )
 }

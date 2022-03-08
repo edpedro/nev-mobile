@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   },
   content:{
     alignItems: "center",
-    marginTop: 60
+    marginTop: 30
   },
   title: {    
     marginBottom: 20,
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
      justifyContent: "center",
      alignItems: "center",
  
-     marginTop: 40,
+     marginTop: 20,
      width: 192,
      height: 58,
      borderRadius: 20,

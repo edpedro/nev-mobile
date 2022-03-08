@@ -62,7 +62,11 @@ const styles = StyleSheet.create({
   optionText:{
     fontSize: 16,
     color: "#555",
-
+  },
+  ErrorTitle: {
+    marginTop: 5, 
+    color: '#fff', 
+    fontSize: 10, 
   }
 });
 

@@ -58,6 +58,7 @@ export default function Login({ navigation }) {
           setData={setEmail} 
           iconName='mail'
           error={errors.email}
+          keyboardType="email-address"
           autoCapitalize='none'
           onFocus={() => handleError(null, 'email')}
         /> 

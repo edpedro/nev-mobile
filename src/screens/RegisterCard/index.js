@@ -6,6 +6,8 @@ import Select from '../../Components/Select'
 
 import styles from './styles'
 
+const banks = ["Itau", "Santander", "Nubank", "Inter", "Bradesco"]
+
 export default function RegisterCard(){
   const [name, setName] = useState("")
   const [limit, setLimit] = useState("")
@@ -13,12 +15,59 @@ export default function RegisterCard(){
   const [win, setWin] = useState("")
   const [bank, setBank] = useState("")
 
-  function handleSubmit(){
-    console.log("email", name)
-    console.log("password", password)
+  const [errors, setErrors] = useState({})
+
+  function validate(){
+    Keyboard.dismiss()
+    let isValid = true
+    if(!name){
+      handleError("Por favor insira nome", 'name')
+      isValid = false
+    }
+    if(!limit){
+      handleError("Por favor insira limite", 'limit')
+      isValid = false
+    }
+    if(!close){
+      handleError("Por favor insira dia fechar", 'close')
+      isValid = false
+    }
+    if(!win){
+      handleError("Por favor insira dia vence", 'win')
+      isValid = false
+    }
+    if(!bank){
+      handleError("Por favor insira banco", 'bank')
+      isValid = false
+    }
+
+    if(isValid){
+      handleSubmit()
+    }
   }
 
-  const data = ["Itau", "Santander", "Nubank", "Inter", "Bradesco"]
+  function handleSubmit(){
+    const data = {
+      name,
+      limit,
+      close,
+      win,
+      bank
+    }
+      
+  } 
+
+  const handleError = (error, input) => {
+    setErrors(prevState => ({...prevState, [input]: error}));
+  };
+
+
+  function handleSubmit(){
+    console.log("email", close)
+    console.log("password", win)
+  }
+
+  
   console.log(bank)
   return (
     <KeyboardAvoidingView 
@@ -28,19 +77,52 @@ export default function RegisterCard(){
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.content}>
         <Text style={styles.title}>Cadastrar Cartão</Text>      
-        <Input title="Nome da conta" name={name} setData={setName}/>
-        <Input title="Limite" keyboardType="numeric" name={limit} setData={setLimit}/>
-        <Input title="Fechar dia" keyboardType="numeric" name={close} setData={setClose}/>
-        <Input title="Vence dia" keyboardType="numeric" name={win} setData={setWin}/>
-        {/* <Input title="Bandeira/instituição" name={bank} setData={setBank}/> */}
+        <Input 
+          title="Nome da conta" 
+          error={errors.name} 
+          name={name} 
+          setData={setName}
+          onFocus={() => handleError(null, 'name')}
+        />
+        <Input 
+          title="Limite" 
+          error={errors.limit} 
+          keyboardType="numeric" 
+          name={limit} 
+          setData={setLimit}
+          onFocus={() => handleError(null, 'limit')}
+        />
+        <Input 
+          title="Fechar dia" 
+          error={errors.close} 
+          maxLength={2} 
+          keyboardType="numeric" 
+          name={close} 
+          setData={setClose}
+          onFocus={() => handleError(null, 'close')}
+        />
+        <Input 
+          title="Vence dia" 
+          error={errors.close} 
+          maxLength={2} 
+          keyboardType="numeric" 
+          name={win} 
+          setData={setWin}
+          onFocus={() => handleError(null, 'win')}
+        />
+       
         <Select 
           title="Bandeira/instituição" 
           text="Selecione o banco" 
-          options={data} 
-          onChangeSelect={(item) => setBank(item)}
+          options={banks} 
+          error={errors.bank}
+          onChangeSelect={(item) => {
+            setBank(item) 
+            handleError(null, 'bank')         
+          }}         
         />
 
-        <TouchableOpacity style={styles.button} onPress={() => handleSubmit()}>
+        <TouchableOpacity style={styles.button} onPress={() => validate()}>
         <Text style={styles.textButton}>Adicionar</Text>
       </TouchableOpacity>
     </View>    
