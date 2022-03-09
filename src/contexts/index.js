@@ -1,10 +1,13 @@
 
 import { AuthProvider } from "./Auth"
+import { CreditCardProvider } from './CreditCard'
 
 export default function AppProvider({ children }){
   return (
     <AuthProvider>
-      {children}
+      <CreditCardProvider>
+        {children}
+      </CreditCardProvider>      
     </AuthProvider>
   )
 }

@@ -4,11 +4,14 @@ import { Text, View, KeyboardAvoidingView, TouchableOpacity, Platform, Touchable
 import Input from '../../Components/Input'
 import Select from '../../Components/Select'
 
+import { useCreditCard } from '../../contexts/CreditCard'
+
 import styles from './styles'
 
 const banks = ["Itau", "Santander", "Nubank", "Inter", "Bradesco"]
 
-export default function RegisterCard(){
+export default function RegisterCard({ navigation }){
+  const { handleRegisterCard } = useCreditCard()
   const [name, setName] = useState("")
   const [limit, setLimit] = useState("")
   const [close, setClose] = useState("")
@@ -47,14 +50,16 @@ export default function RegisterCard(){
   }
 
   function handleSubmit(){
+    const newLimit = Number(limit)
     const data = {
       name,
-      limit,
+      limit: newLimit,
       close,
       win,
       bank
     }
-      // console.log(data)
+      handleRegisterCard(data)
+      navigation.navigate("Inicio")
   } 
 
   const handleError = (error, input) => {
