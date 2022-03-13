@@ -3,6 +3,9 @@ import { useFonts, Inter_900Black } from '@expo-google-fonts/inter';
 import Routes from "./src/routes";
 import AppProvider from './src/contexts';
 
+import 'intl';
+import 'intl/locale-data/jsonp/pt-BR';
+
 export default function App() {
 
   const [fontsLoaded] = useFonts({

@@ -10,7 +10,8 @@ export default function Input({
   setData, 
   secure, 
   autoCapitalize, 
-  error, 
+  error,
+  value, 
   iconName,
   setHidePass, 
   ...props 

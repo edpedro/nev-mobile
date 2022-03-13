@@ -6,6 +6,8 @@ import User from '../../Components/User'
 import CardComponent from '../../Components/CardComponent'
 import TransComponent from '../../Components/TransComponent'
 
+import { useCreditCard } from '../../contexts/CreditCard'
+
 import styles from './styles'
 
 
@@ -13,6 +15,8 @@ const DATA = [{id: 1}]
 const DATA1 = [{id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}, {id: 6}, {id: 7}, {id: 8}]
 
 export default function Card({ navigation }) {
+  const { creditCards } = useCreditCard() 
+
   return (
    <View style={styles.container}>
      <View style={styles.user}>
@@ -28,9 +32,9 @@ export default function Card({ navigation }) {
         <View style={styles.card}>
        
             <FlatList         
-            data={DATA}
+            data={creditCards}
             renderItem={({item}) => (     
-              <CardComponent />
+              <CardComponent creditCards={item} navigation={navigation}/>
             )}
             horizontal={true}
             scrollEnabled

@@ -1,12 +1,21 @@
+import { useEffect } from 'react'
 import { Text, View, TouchableOpacity } from 'react-native'
 
 import User from '../../Components/User'
+
+import { useCreditCard } from '../../contexts/CreditCard'
+import Loading from '../../screens/Loading'
 
 import { FontAwesome, MaterialIcons, Ionicons } from '@expo/vector-icons';
 
 import styles from './styles'
 
-export default function DetailCard(){
+export default function DetailCard({route, navigation }){
+  const { handleShowCreditCard, showCreditCard, isLoading } = useCreditCard()
+
+  const { creditCards } = route.params;
+  const {id, bank, close, win} = creditCards
+
   return (
     <View style={styles.container}>
       <User /> 
@@ -16,10 +25,10 @@ export default function DetailCard(){
           <FontAwesome name="credit-card" size={25} color="black" />
         </View>
 
-        <Text style={styles.detailTitle}>Nubank</Text>
+        <Text style={styles.detailTitle}>{bank}</Text>
 
         <View style={styles.detailBody}>          
-          <Text style={styles.contentTitle}>01 Vencimento | 09 Fechamento</Text>
+          <Text style={styles.contentTitle}>{win} Vencimento | {close} Fechamento</Text>
           <View style={styles.contenInvoice}>
             <Text style={styles.invoiceTitle}>Fatura</Text>
             <Text style={styles.invoiceValue}>R$ - 150,00</Text>
@@ -32,7 +41,11 @@ export default function DetailCard(){
 
         <View style={styles.iconEditRemove}>
           <View style={styles.iconEdit}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => {      
+              navigation.navigate('RegisterCard', {
+                id          
+              });
+           }}>
               <MaterialIcons name="mode-edit" size={35} color="black" />
             </TouchableOpacity>            
           </View>
@@ -45,7 +58,7 @@ export default function DetailCard(){
 
         <View style={styles.goBack}>
           <Ionicons name="arrow-back" size={24} color="black" />
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Text style={styles.goBackTitle}>Voltar</Text>
           </TouchableOpacity>
                     

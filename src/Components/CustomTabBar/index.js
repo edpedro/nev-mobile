@@ -26,7 +26,7 @@ export default function CustomTabBar({ state, navigation,label}){
         </Text> 
       </TouchableOpacity >
 
-      <TouchableOpacity style={styles.tabItemCenter} onPress={() => goTo("Card")}>  
+      <TouchableOpacity style={styles.tabItemCenter} onPress={() => goTo("RegisterRelease")}>  
         <AntDesign name="plus" size={30} color="white" />     
       </TouchableOpacity >
 

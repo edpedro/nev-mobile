@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Text, View, KeyboardAvoidingView, TouchableOpacity, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native'
 
 import Input from '../../Components/Input'
 import Select from '../../Components/Select'
+
+import Loading from '../../screens/Loading'
 
 import { useCreditCard } from '../../contexts/CreditCard'
 
@@ -10,16 +12,32 @@ import styles from './styles'
 
 const banks = ["Itau", "Santander", "Nubank", "Inter", "Bradesco"]
 
-export default function RegisterCard({ navigation }){
-  const { handleRegisterCard } = useCreditCard()
-  const [name, setName] = useState("")
-  const [limit, setLimit] = useState("")
-  const [close, setClose] = useState("")
-  const [win, setWin] = useState("")
-  const [bank, setBank] = useState("")
+export default function RegisterCard({ route, navigation }){
+  const { handleRegisterCard, handleShowCreditCard, showCreditCard,isLoading } = useCreditCard()
+  const [name, setName] = useState(showCreditCard.name)
+  const [limit, setLimit] = useState(showCreditCard.limit)
+  const [close, setClose] = useState(showCreditCard.close)
+  const [win, setWin] = useState(showCreditCard.win)
+  const [bank, setBank] = useState(showCreditCard.bank)
 
   const [errors, setErrors] = useState({})
 
+  const { params } = route
+  const id = params ? params.id : null
+
+  useEffect(() => {    
+   
+    handleShowCreditCard(id)
+
+    if(!id) {
+      setName('')
+      setLimit('')
+      setClose('')
+      setWin('')
+      setBank('')
+    }   
+  }, [navigation])
+  console.log(bank)
   function validate(){
     Keyboard.dismiss()
     let isValid = true
@@ -64,7 +82,14 @@ export default function RegisterCard({ navigation }){
 
   const handleError = (error, input) => {
     setErrors(prevState => ({...prevState, [input]: error}));
-  };  
+  };
+
+  if(isLoading){
+    return (
+      <Loading />
+    )    
+  }
+  
   return (
     <KeyboardAvoidingView 
     behavior={Platform.OS === "ios" ? "padding" : "height"}   
@@ -76,7 +101,7 @@ export default function RegisterCard({ navigation }){
         <Input 
           title="Nome da conta" 
           error={errors.name} 
-          name={name} 
+          name={name}          
           setData={setName}
           onFocus={() => handleError(null, 'name')}
         />
@@ -109,7 +134,8 @@ export default function RegisterCard({ navigation }){
        
         <Select 
           title="Bandeira/instituição" 
-          text="Selecione o banco" 
+          text={"Selecione o banco"} 
+          value={bank || undefined}
           options={banks} 
           error={errors.bank}
           onChangeSelect={(item) => {

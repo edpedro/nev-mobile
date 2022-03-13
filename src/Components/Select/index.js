@@ -6,11 +6,12 @@ import { Entypo } from '@expo/vector-icons';
 import styles from './styles'
 
 
-export default function Select({ title, text, onChangeSelect, options, error }){
-  const [txt, setTxt] = useState(text)
+export default function Select({ title, text, onChangeSelect, options, error, value }){
+
+  const [txt, setTxt] = useState(value ? value : text)
   const [selectd, setSelectd] = useState("")
   const [modalVisible, setModalVisible] = useState(false)
-
+ 
   function renderOption(item){
     return (
       <TouchableOpacity style={styles.optionContainer} 
