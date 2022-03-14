@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity } from "react-native";
 import styles from './styles'
 
 export default function CardComponent({ creditCards, navigation }){
-  const {id, bank, close, win, limit, cardBalance } = creditCards  
+  const { bank, close, win, limit, cardBalance } = creditCards  
 
   return (
     <View style={styles.container}>
@@ -15,7 +15,8 @@ export default function CardComponent({ creditCards, navigation }){
         <View style={styles.invoice}>
           <Text style={styles.invoiceTitle}>Fatura</Text>
           
-          <Text style={styles.invoiceValue}>  {Intl.NumberFormat('pt-BR', { 
+          <Text style={styles.invoiceValue}>  
+          {Intl.NumberFormat('pt-BR', { 
             style: 'currency', 
             currency: 'BRL',
           }).format(cardBalance)}</Text>

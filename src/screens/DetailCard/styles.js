@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffff",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    marginTop: 25,
+    marginTop: 10,
   },
   iconCard:{
     width: 70,
@@ -21,14 +21,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: -30,
-    marginBottom: 30
+    marginBottom: 20
   },
   detailTitle: {
     fontWeight: "bold",
     fontSize: 28
   },
   detailBody:{
-    marginTop: 20,
+    marginTop: 10,
     marginBottom: 20
   },
   contentTitle:{
@@ -57,11 +57,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   iconEditRemove: {
-    flexDirection: "row",
-    
+    flexDirection: "row",    
     margin: 10,
-    marginTop: 60,
-    marginBottom: 60,
+    marginTop: 10, 
+    marginBottom: 0,
   },
   iconEdit: {
     width: 70,
@@ -81,14 +80,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginLeft: 20
   },
-  goBack:{
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",      
-  },
-  goBackTitle: {
-    fontSize: 15,
-    marginLeft: 5,
+  transaction: {
+    marginRight: 20
   }
 });
 

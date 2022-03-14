@@ -37,7 +37,7 @@ export default function RegisterCard({ route, navigation }){
       setBank('')
     }   
   }, [navigation])
-  console.log(bank)
+
   function validate(){
     Keyboard.dismiss()
     let isValid = true

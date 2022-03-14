@@ -1,20 +1,18 @@
-import { useEffect } from 'react'
-import { Text, View, TouchableOpacity } from 'react-native'
+import { Text, View, TouchableOpacity, FlatList } from 'react-native'
 
 import User from '../../Components/User'
+import TransComponent from '../../Components/TransComponent'
 
-import { useCreditCard } from '../../contexts/CreditCard'
-import Loading from '../../screens/Loading'
-
-import { FontAwesome, MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
 import styles from './styles'
 
-export default function DetailCard({route, navigation }){
-  const { handleShowCreditCard, showCreditCard, isLoading } = useCreditCard()
+const DATA1 = [{id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}, {id: 6}, {id: 7}, {id: 8}]
+
+export default function DetailCard({route, navigation }){ 
 
   const { creditCards } = route.params;
-  const {id, bank, close, win} = creditCards
+  const {id, bank, close, win, limit, cardBalance} = creditCards
 
   return (
     <View style={styles.container}>
@@ -31,11 +29,21 @@ export default function DetailCard({route, navigation }){
           <Text style={styles.contentTitle}>{win} Vencimento | {close} Fechamento</Text>
           <View style={styles.contenInvoice}>
             <Text style={styles.invoiceTitle}>Fatura</Text>
-            <Text style={styles.invoiceValue}>R$ - 150,00</Text>
+            <Text style={styles.invoiceValue}>  
+            {Intl.NumberFormat('pt-BR', { 
+            style: 'currency', 
+            currency: 'BRL',
+          }).format(cardBalance)}
+          </Text>
           </View>
           <View style={styles.contentLimit}>
             <Text style={styles.limitTitle}>Limite disponivel</Text>
-            <Text style={styles.limitValue}>R$ - 150,00</Text>         
+            <Text style={styles.limitValue}>  
+              {Intl.NumberFormat('pt-BR', { 
+              style: 'currency', 
+              currency: 'BRL',
+            }).format(limit - cardBalance)}
+           </Text>         
           </View>          
         </View>
 
@@ -53,15 +61,18 @@ export default function DetailCard({route, navigation }){
             <TouchableOpacity>
               <MaterialIcons name="delete-forever" size={35} color="black" />
             </TouchableOpacity>           
-          </View>
-        </View>
-
-        <View style={styles.goBack}>
-          <Ionicons name="arrow-back" size={24} color="black" />
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Text style={styles.goBackTitle}>Voltar</Text>
-          </TouchableOpacity>
-                    
+          </View>         
+        </View>  
+        <View style={styles.transaction}>
+          <FlatList         
+            data={DATA1}
+            renderItem={({item}) => (
+              <TransComponent />
+            )}        
+            scrollEnabled
+            showsHorizontalScrollIndicator={false}          
+            keyExtractor={item => item.id}
+          />      
         </View>        
       </View>
     </View>

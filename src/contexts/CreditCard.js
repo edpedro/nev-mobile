@@ -32,9 +32,8 @@ export function CreditCardProvider({ children }) {
       const { data } = await api.post('/creditCard/list', data1, { 
         headers: {"Authorization" : `Bearer ${token}`}
       })      
-      setCreditCards(data)     
-  
-      console.log(data)
+      setCreditCards(data)    
+    
     } catch (error) {     
       console.log(error) 
       ToastAndroid.showWithGravity(
