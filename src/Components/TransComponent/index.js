@@ -1,13 +1,16 @@
 import { View, Text } from 'react-native'
+import moment from 'moment'
 
 import { FontAwesome, Entypo  } from '@expo/vector-icons';
 
 import styles from './styles'
 
-export default function TransComponent({ data }){ 
-  const { value, type, category, operation} = data
+export default function TransComponent({ invoceCreditCard }){ 
+  const { value, type, category, operation, data} = invoceCreditCard
 
-  console.log(data)
+ 
+
+  console.log(moment(data).format('MMMM MM-YYYY'))
   return (  
     <View style={styles.container}>
 
@@ -18,7 +21,7 @@ export default function TransComponent({ data }){
      <View style={styles.content}>
        <Text style={styles.contentTitle}>{category}</Text>
        <View style={styles.contentData}>
-         <Text>Fev 02-2022</Text>
+         <Text>{moment(data).format('MMM MM-YYYY')}</Text>
           <View style={styles.contentCircle}></View>
          <Text>{operation}</Text>
        </View>       
