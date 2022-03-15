@@ -61,7 +61,7 @@ export default function DetailCard({route, navigation }){
           <View style={styles.iconEdit}>
             <TouchableOpacity onPress={() => {      
               navigation.navigate('RegisterCard', {
-                id          
+                creditCards        
               });
            }}>
               <MaterialIcons name="mode-edit" size={35} color="black" />

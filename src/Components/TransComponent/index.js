@@ -8,9 +8,6 @@ import styles from './styles'
 export default function TransComponent({ invoceCreditCard }){ 
   const { value, type, category, operation, data} = invoceCreditCard
 
- 
-
-  console.log(moment(data).format('MMMM MM-YYYY'))
   return (  
     <View style={styles.container}>
 

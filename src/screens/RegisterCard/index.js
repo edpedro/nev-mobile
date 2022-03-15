@@ -13,31 +13,30 @@ import styles from './styles'
 const banks = ["Itau", "Santander", "Nubank", "Inter", "Bradesco"]
 
 export default function RegisterCard({ route, navigation }){
-  const { handleRegisterCard, handleShowCreditCard, showCreditCard,isLoading } = useCreditCard()
-  const [name, setName] = useState(showCreditCard.name)
-  const [limit, setLimit] = useState(showCreditCard.limit)
-  const [close, setClose] = useState(showCreditCard.close)
-  const [win, setWin] = useState(showCreditCard.win)
-  const [bank, setBank] = useState(showCreditCard.bank)
+  const { handleRegisterCard, isLoading } = useCreditCard()
+
+  const { creditCards } = route.params || {};
+  
+  const [name, setName] = useState("")
+  const [limit, setLimit] = useState("")
+  const [close, setClose] = useState("")
+  const [win, setWin] = useState("")
+  const [bank, setBank] = useState("")
 
   const [errors, setErrors] = useState({})
 
-  const { params } = route
-  const id = params ? params.id : null
-
-  useEffect(() => {    
-   
-    handleShowCreditCard(id)
-
-    if(!id) {
-      setName('')
-      setLimit('')
-      setClose('')
-      setWin('')
-      setBank('')
+  useEffect(() => {     
+    
+    if(creditCards) {
+      setName(creditCards.name)
+      setLimit(creditCards.limit)
+      setClose(creditCards.close)
+      setWin(creditCards.win)
+      setBank(creditCards.bank)
+      
     }   
-  }, [navigation])
-
+  }, [creditCards])
+ 
   function validate(){
     Keyboard.dismiss()
     let isValid = true
@@ -135,7 +134,7 @@ export default function RegisterCard({ route, navigation }){
         <Select 
           title="Bandeira/instituição" 
           text={"Selecione o banco"} 
-          value={bank || undefined}
+          value={bank}
           options={banks} 
           error={errors.bank}
           onChangeSelect={(item) => {

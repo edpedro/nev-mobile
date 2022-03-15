@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Text, View, TouchableOpacity, Modal, SafeAreaView, FlatList } from 'react-native'
 
 import { Entypo } from '@expo/vector-icons';
@@ -6,11 +6,16 @@ import { Entypo } from '@expo/vector-icons';
 import styles from './styles'
 
 
-export default function Select({ title, text, onChangeSelect, options, error, value }){
-
-  const [txt, setTxt] = useState(value ? value : text)
+export default function Select({ title, text, onChangeSelect, options, error, value }){ 
+  const [txt, setTxt] = useState(text)
   const [selectd, setSelectd] = useState("")
   const [modalVisible, setModalVisible] = useState(false)
+
+  useEffect(() => {
+    if(value){
+      setTxt(value)
+    }
+  }, [value])
  
   function renderOption(item){
     return (
