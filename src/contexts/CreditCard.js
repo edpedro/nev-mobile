@@ -10,11 +10,12 @@ export function CreditCardProvider({ children }) {
   const [creditCards, setCreditCards] = useState({})
   const [invoceCreditCard, setInvoceCreditCard] = useState({})
   const [isLoading, setIsLoading] = useState(true)
+  const [updateCreditCard, setUpdateCreditCard] = useState({})
   
 
   useEffect(() => {
     handleListCreditCard()
-  },[])
+  },[updateCreditCard])
 
   const dataCurrent = new Date(); 
   const month = String(dataCurrent.getMonth() + 1).padStart(2, '0');
@@ -67,6 +68,30 @@ export function CreditCardProvider({ children }) {
     }
   }
 
+  async function handleUpdateCard (id, card) { 
+    const authData  = await AsyncStorage.getItem('@data')
+    const  dataToken  = JSON.parse(authData)   
+   
+    try {
+      const { data } = await api.put(`/creditCard/${id}`, card, { 
+        headers: {"Authorization" : `Bearer ${dataToken.token}`}
+      })
+
+      setUpdateCreditCard(data)
+      ToastAndroid.showWithGravity(
+        "Atualizado efetuado com sucesso",
+        ToastAndroid.SHORT,
+        ToastAndroid.TOP
+      )
+    } catch (error) {      
+      ToastAndroid.showWithGravity(
+        "Erro ao atualizar cartão de credito",
+        ToastAndroid.SHORT,
+        ToastAndroid.TOP
+      )
+    }
+  }
+
   async function handleInvoceCreditCard (id, date) {
     const authData  = await AsyncStorage.getItem('@data')
     const { token }  = JSON.parse(authData)
@@ -88,11 +113,13 @@ export function CreditCardProvider({ children }) {
   
   return (
     <CreditCardContext.Provider value={{ 
-      handleRegisterCard, 
-      creditCards, 
-      handleInvoceCreditCard, 
-      invoceCreditCard,
-      isLoading 
+        handleRegisterCard, 
+        creditCards, 
+        handleInvoceCreditCard, 
+        invoceCreditCard,
+        isLoading,
+        handleUpdateCard,
+        updateCreditCard 
       }}>
       {children}
     </CreditCardContext.Provider>

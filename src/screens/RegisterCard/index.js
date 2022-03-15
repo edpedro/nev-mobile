@@ -13,7 +13,7 @@ import styles from './styles'
 const banks = ["Itau", "Santander", "Nubank", "Inter", "Bradesco"]
 
 export default function RegisterCard({ route, navigation }){
-  const { handleRegisterCard, isLoading } = useCreditCard()
+  const { handleRegisterCard, isLoading, handleUpdateCard, updateCreditCard } = useCreditCard()
 
   const { creditCards } = route.params || {};
   
@@ -22,6 +22,8 @@ export default function RegisterCard({ route, navigation }){
   const [close, setClose] = useState("")
   const [win, setWin] = useState("")
   const [bank, setBank] = useState("")
+
+  const [update, setUpdate] = useState("")
 
   const [errors, setErrors] = useState({})
 
@@ -33,6 +35,7 @@ export default function RegisterCard({ route, navigation }){
       setClose(creditCards.close)
       setWin(creditCards.win)
       setBank(creditCards.bank)
+      setUpdate(creditCards.id)
       
     }   
   }, [creditCards])
@@ -75,8 +78,15 @@ export default function RegisterCard({ route, navigation }){
       win,
       bank
     }
+   
+    if(update){
+      handleUpdateCard(update, data)
+      navigation.navigate("Inicio")
+
+    }else{
       handleRegisterCard(data)
       navigation.navigate("Inicio")
+    }
   } 
 
   const handleError = (error, input) => {
