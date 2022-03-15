@@ -8,28 +8,28 @@ const CreditCardContext = createContext()
 
 export function CreditCardProvider({ children }) { 
   const [creditCards, setCreditCards] = useState({})
-  const [showCreditCard, setShowCreditCard] = useState({})
+  const [invoceCreditCard, setInvoceCreditCard] = useState({})
   const [isLoading, setIsLoading] = useState(true)
-
   
 
   useEffect(() => {
     handleListCreditCard()
   },[])
 
+  const dataCurrent = new Date(); 
+  const month = String(dataCurrent.getMonth() + 1).padStart(2, '0');
+
+  const monthCurrent = {
+    month
+  }
+
   async function handleListCreditCard () { 
     const authData  = await AsyncStorage.getItem('@data')
     const { token }  = JSON.parse(authData)   
 
-    const data = new Date(); 
-    const month = String(data.getMonth() + 1).padStart(2, '0');
-
-    const data1 = {
-      month
-    }
-       
+           
     try {  
-      const { data } = await api.post('/creditCard/list', data1, { 
+      const { data } = await api.post('/creditCard/list', monthCurrent, { 
         headers: {"Authorization" : `Bearer ${token}`}
       })      
       setCreditCards(data)    
@@ -67,20 +67,21 @@ export function CreditCardProvider({ children }) {
     }
   }
 
-  async function handleShowCreditCard (id) {
+  async function handleInvoceCreditCard (id, date) {
     const authData  = await AsyncStorage.getItem('@data')
-    const { token }  = JSON.parse(authData)   
-      
+    const { token }  = JSON.parse(authData)
+    
+    const month = date ? date : monthCurrent
+  
     try {
       setIsLoading(true)
-      const { data } = await api.get(`/creditCard/${id}`, { 
+      const { data } = await api.post(`/creditCard/invoce/${id}`, month, { 
         headers: {"Authorization" : `Bearer ${token}`}
       })      
-      setShowCreditCard(data)
-      setIsLoading(false)
-      
+      setInvoceCreditCard(data)
+      setIsLoading(false)     
     } catch (error) {      
-      setShowCreditCard({})
+      setInvoceCreditCard({})
       setIsLoading(false)
     }
   }
@@ -89,8 +90,8 @@ export function CreditCardProvider({ children }) {
     <CreditCardContext.Provider value={{ 
       handleRegisterCard, 
       creditCards, 
-      handleShowCreditCard, 
-      showCreditCard,
+      handleInvoceCreditCard, 
+      invoceCreditCard,
       isLoading 
       }}>
       {children}

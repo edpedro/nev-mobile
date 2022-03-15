@@ -4,8 +4,11 @@ import { FontAwesome, Entypo  } from '@expo/vector-icons';
 
 import styles from './styles'
 
-export default function TransComponent(){
-  return (
+export default function TransComponent({ data }){ 
+  const { value, type, category, operation} = data
+
+  console.log(data)
+  return (  
     <View style={styles.container}>
 
      <View style={styles.iconCardCircle}>
@@ -13,20 +16,25 @@ export default function TransComponent(){
      </View>
 
      <View style={styles.content}>
-       <Text style={styles.contentTitle}>Internet</Text>
+       <Text style={styles.contentTitle}>{category}</Text>
        <View style={styles.contentData}>
          <Text>Fev 02-2022</Text>
           <View style={styles.contentCircle}></View>
-         <Text>Cartão</Text>
+         <Text>{operation}</Text>
        </View>       
      </View>
 
      <View style={styles.circle}>
-      <Entypo name="circle" size={12} color="red" />
+      <Entypo name="circle" size={12} color={type === "despesa" ? "red" : "#058373"} />
      </View>
 
      <View>
-       <Text style={styles.valueText}>R$ - 150,00</Text>
+       <Text style={styles.valueText}>
+        {type === "despesa" ? "-": "+"}{" "}
+       {Intl.NumberFormat('pt-BR', { 
+            style: 'currency', 
+            currency: 'BRL',
+          }).format(value)}</Text>
      </View>
     </View>
   ) 

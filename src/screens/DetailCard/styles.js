@@ -6,12 +6,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#058373',   
   },
   content:{
-    flex: 1,
-    alignItems: "center",
+    flex: 1,   
     backgroundColor: "#ffff",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     marginTop: 10,
+  },
+  contentBody: {
+    alignItems: "center"
   },
   iconCard:{
     width: 70,
@@ -60,7 +62,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",    
     margin: 10,
     marginTop: 10, 
-    marginBottom: 0,
+    marginBottom: 15,
   },
   iconEdit: {
     width: 70,
@@ -82,6 +84,14 @@ const styles = StyleSheet.create({
   },
   transaction: {
     marginRight: 20
+  },
+  notRelease: {
+    marginTop: 60,
+    alignItems: 'center'
+  },
+  notReleaseTitle: {
+    fontSize: 16,
+    fontWeight: "bold"
   }
 });
 

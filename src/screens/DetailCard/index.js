@@ -2,23 +2,33 @@ import { Text, View, TouchableOpacity, FlatList } from 'react-native'
 
 import User from '../../Components/User'
 import TransComponent from '../../Components/TransComponent'
+import Loading from '../Loading'
+
+import { useCreditCard } from '../../contexts/CreditCard'
 
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
 import styles from './styles'
 
-const DATA1 = [{id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}, {id: 6}, {id: 7}, {id: 8}]
-
 export default function DetailCard({route, navigation }){ 
+  const { invoceCreditCard, isLoading } = useCreditCard()
 
   const { creditCards } = route.params;
   const {id, bank, close, win, limit, cardBalance} = creditCards
 
+  if(isLoading){
+    return (
+      <Loading />
+    )
+  }
+  
   return (
     <View style={styles.container}>
       <User /> 
 
       <View style={styles.content}>
+        <View style={styles.contentBody}>   
+
         <View style={styles.iconCard}>
           <FontAwesome name="credit-card" size={25} color="black" />
         </View>
@@ -63,17 +73,23 @@ export default function DetailCard({route, navigation }){
             </TouchableOpacity>           
           </View>         
         </View>  
-        <View style={styles.transaction}>
+        </View>
+        {invoceCreditCard && invoceCreditCard.length > 0 ?
           <FlatList         
-            data={DATA1}
-            renderItem={({item}) => (
-              <TransComponent />
-            )}        
+            data={invoceCreditCard}
+            renderItem={({item}) =>                 
+              <TransComponent data={item}/>                            
+            }        
             scrollEnabled
             showsHorizontalScrollIndicator={false}          
             keyExtractor={item => item.id}
-          />      
-        </View>        
+          /> 
+          :
+          <View style={styles.notRelease}>
+            <Text style={styles.notReleaseTitle}>Sem lançamentos</Text>     
+          </View>          
+        }         
+          
       </View>
     </View>
   )

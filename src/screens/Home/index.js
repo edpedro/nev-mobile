@@ -34,7 +34,7 @@ export default function Home({ navigation }) {
         </View>
        
         <Text style={styles.transactionTitle}>Recentes Lançamentos</Text>
-        <FlatList         
+        {/* <FlatList         
             data={DATA1}
             renderItem={({item}) => (
               <TransComponent />
@@ -42,7 +42,7 @@ export default function Home({ navigation }) {
             scrollEnabled
             showsHorizontalScrollIndicator={false}          
             keyExtractor={item => item.id}
-          />       
+          />        */}
       </View>
     </View>
   );

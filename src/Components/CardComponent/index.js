@@ -2,8 +2,11 @@ import { Text, View, TouchableOpacity } from "react-native";
 
 import styles from './styles'
 
+import { useCreditCard } from '../../contexts/CreditCard'
+
 export default function CardComponent({ creditCards, navigation }){
-  const { bank, close, win, limit, cardBalance } = creditCards  
+  const { handleInvoceCreditCard } = useCreditCard()
+  const { id, bank, close, win, limit, cardBalance } = creditCards  
 
   return (
     <View style={styles.container}>
@@ -30,7 +33,8 @@ export default function CardComponent({ creditCards, navigation }){
           }).format(limit - cardBalance)}</Text>     
         </View>
       </View>
-      <TouchableOpacity style={styles.viewInvoice} onPress={() => {      
+      <TouchableOpacity style={styles.viewInvoice} onPress={() => {  
+          handleInvoceCreditCard(id),    
           navigation.navigate('DetailCard', {
             creditCards          
           });
