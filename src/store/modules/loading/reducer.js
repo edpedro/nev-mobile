@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   loading: false   
 }
 
-function loadingReducer(state = INITIAL_STATE, action){
+function loadings(state = INITIAL_STATE, action){
   switch(action.type){
     case types.SET_LOADING : {
       return produce(state, (draft) => {     
@@ -17,4 +17,4 @@ function loadingReducer(state = INITIAL_STATE, action){
   }
 }
 
-export default loadingReducer
+export default loadings

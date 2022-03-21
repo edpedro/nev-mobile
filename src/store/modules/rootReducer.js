@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 
-import userReduce from './user/reducer'
-import loadingReducer from './loading/reducer'
+import users from './user/reducer'
+import loadings from './loading/reducer'
 
 export default combineReducers({
-  userReduce,
-  loadingReducer
+  users,
+  loadings
 })

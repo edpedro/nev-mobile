@@ -7,7 +7,7 @@ import styles from './styles'
 import userLogo from '../../assets/user.png'
 
 export default function User(){
-  const { user } = useSelector((state) => state.userReduce)
+  const { user } = useSelector((state) => state.users)
 
   const data = new Date
   const curretData = 
