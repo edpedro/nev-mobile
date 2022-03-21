@@ -1,16 +1,43 @@
 import { takeLatest, all, call, put } from 'redux-saga/effects'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Toast from 'react-native-toast-message';
-import { Alert } from 'react-native'
 
 import types from './types'
-import { loginSucess, logoutSucess } from './actions'
+import { loginSucess, logoutSucess, loginUser } from './actions'
 import { loading } from '../loading/actions'
 
 import api from '../../../services/api'
 import { replace, navigate } from '../../../services/navigation'
 
+export function* RegisterUser({ user }){
+
+  try {
+    const { data } = yield call(api.post, 'users', user)  
+
+    if(data){
+      const { email, password } = user
+      
+      yield put(loginUser({email, password})) 
+    }  
+    
+    Toast.show({
+      type: 'success',
+      text1: 'Acesso',
+      text2: 'Cadastro feito com sucesso'
+    });
+
+  } catch (error) {
+    yield navigate('Register');
+    Toast.show({
+      type: 'error',
+      text1: 'Erro de acesso',
+      text2: 'Usuario já existe!'
+    });
+  }
+}
+
 export function* LoginUser({ user }){
+ 
   yield put(loading(true));
   try {
     const { data } = yield call(api.post, 'sessions', user)
@@ -42,6 +69,7 @@ export function* Logout(){
 }
 
 export default all([
+  takeLatest(types.REGISTER_USER, RegisterUser),
   takeLatest(types.LOGIN_USER, LoginUser),
   takeLatest(types.LOGOUT, Logout)
 ]);

@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux'
 import { View, Text, TouchableOpacity, KeyboardAvoidingView, Platform, Keyboard } from 'react-native';
 
 import Input from '../../Components/Input';
+
+import { registerUser } from '../../store/modules/user/actions'
 
 import styles from './styles'
 
@@ -11,6 +14,8 @@ export default function Register({ navigation }) {
   const [password, setPassword] = useState("")
   const [errors, setErrors] = useState({})
   const [hidePass, setHidePass] = useState(true)
+
+  const dispatch = useDispatch()
 
   function validate(){
     Keyboard.dismiss()
@@ -38,7 +43,7 @@ export default function Register({ navigation }) {
       email,
       password,
     } 
-    navigation.navigate("Login")
+    dispatch(registerUser(data))
   }
 
   const handleError = (error, input) => {

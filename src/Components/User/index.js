@@ -8,7 +8,7 @@ import userLogo from '../../assets/user.png'
 
 export default function User(){
   const { user } = useSelector((state) => state.userReduce)
-  
+
   const data = new Date
   const curretData = 
   String(data.getDate()).padStart(2, '0') 
@@ -24,10 +24,8 @@ export default function User(){
           <Text style={styles.UserTitleData}>{curretData}</Text>
           <Text style={styles.UserTitleName}>
             {user.user.name[0].toUpperCase() + user.user.name.substr(1)}
-
           </Text>
-        </View>
-        
+        </View>        
       </View>
 
       <MaterialIcons name="add-alert" style={{marginRight: 10}} size={34} color="#fff" />

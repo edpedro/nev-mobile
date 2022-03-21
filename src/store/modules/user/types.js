@@ -3,7 +3,8 @@ const types = {
   SET_USER: "@user/SET_USER",
   LOGIN_USER: '@user/LOGIN_USER',
   LOGOUT: '@user/LOGOUT',
-  LOGOUT_SUCCESS: '@user/LOGOUT_SUCCESS'
+  LOGOUT_SUCCESS: '@user/LOGOUT_SUCCESS',
+  REGISTER_USER: '@user/REGISTER_USER'
 }
 
 export default types
