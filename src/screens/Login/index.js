@@ -1,18 +1,41 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { View, Text, TouchableOpacity, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import { useAuth } from '../../contexts/Auth'
-
-
 import Input from '../../Components/Input';
+import Loading from '../Loading'
+
+import { loginUser, authUser } from '../../store/modules/user/actions'
+
+import { replace } from '../../services/navigation'
 
 import styles from './styles'
 
 export default function Login({ navigation }) {
-  const { handleLogin } = useAuth()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [errors, setErrors] = useState({})
   const [hidePass, setHidePass] = useState(true)
+  const [loggedState, setLoggedState] = useState(false)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    auth()
+  }, [])
+
+  async function auth(){
+    const user = await AsyncStorage.getItem('@data') 
+ 
+    if(!user){
+      setLoggedState(true);
+      replace('Login');
+    }else {
+      dispatch(authUser('user', JSON.parse(user)))
+      replace('Home');
+     }
+   }  
+   
 
   function validate(){
     Keyboard.dismiss()
@@ -35,13 +58,19 @@ export default function Login({ navigation }) {
     const data = {
       email,
       password
-    }
-    handleLogin(data)    
+    }   
+    dispatch(loginUser(data))
   } 
 
   const handleError = (error, input) => {
     setErrors(prevState => ({...prevState, [input]: error}));
   };
+
+  if(!loggedState){
+    return (
+      <Loading />
+    )
+  }
 
   return (
     <KeyboardAvoidingView 

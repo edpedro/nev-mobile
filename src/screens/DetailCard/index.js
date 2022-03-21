@@ -1,28 +1,22 @@
+import { useState } from 'react'
 import { Text, View, TouchableOpacity, FlatList } from 'react-native'
 
 import User from '../../Components/User'
 import TransComponent from '../../Components/TransComponent'
 import Loading from '../Loading'
-
-import { useCreditCard } from '../../contexts/CreditCard'
+import ModalDelete from '../../Components/ModalDelete'
 
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
 import styles from './styles'
 
 export default function DetailCard({route, navigation }){ 
-  const { invoceCreditCard, isLoading } = useCreditCard()
+  const [modalVisible, setModalVisible] = useState(false);
 
   const { creditCards } = route.params;
   const {id, bank, close, win, limit, cardBalance} = creditCards
 
-  if(isLoading){
     return (
-      <Loading />
-    )
-  }
-  
-  return (
     <View style={styles.container}>
       <User /> 
 
@@ -68,13 +62,13 @@ export default function DetailCard({route, navigation }){
             </TouchableOpacity>            
           </View>
           <View style={styles.iconRemove}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => setModalVisible(true)} >
               <MaterialIcons name="delete-forever" size={35} color="black" />
             </TouchableOpacity>           
           </View>         
         </View>  
         </View>
-        {invoceCreditCard && invoceCreditCard.length > 0 ?
+        {/* {invoceCreditCard && invoceCreditCard.length > 0 ?
           <FlatList         
             data={invoceCreditCard}
             renderItem={({item}) =>                 
@@ -88,8 +82,15 @@ export default function DetailCard({route, navigation }){
           <View style={styles.notRelease}>
             <Text style={styles.notReleaseTitle}>Sem lançamentos</Text>     
           </View>          
-        }         
-          
+        }   */}
+        {modalVisible && 
+          <ModalDelete 
+            idCard={id} 
+            modalVisible={modalVisible} 
+            setModalVisible={setModalVisible}
+            navigation={navigation}
+          /> 
+        }      
       </View>
     </View>
   )

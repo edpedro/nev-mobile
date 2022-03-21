@@ -1,7 +1,9 @@
 import AppLoading from 'expo-app-loading';
 import { useFonts, Inter_900Black } from '@expo-google-fonts/inter';
 import Routes from "./src/routes";
-import AppProvider from './src/contexts';
+
+import { Provider } from 'react-redux'
+import store from './src/store'
 
 import 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
@@ -18,9 +20,9 @@ export default function App() {
   }
 
   return (
-    <AppProvider>
+    <Provider store={store}>
       <Routes/>
-    </AppProvider>    
+    </Provider>    
   );
 }
 

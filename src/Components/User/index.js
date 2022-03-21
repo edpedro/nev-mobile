@@ -1,14 +1,11 @@
 import { View, Text, Image } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons';
 
-import { useAuth } from '../../contexts/Auth'
-
 import styles from './styles'
 
 import userLogo from '../../assets/user.png'
 
 export default function User(){
-  const { user } = useAuth()  
 
   const data = new Date
   const curretData = 
@@ -24,7 +21,8 @@ export default function User(){
         <View style={styles.contentUserTitle}>
           <Text style={styles.UserTitleData}>{curretData}</Text>
           <Text style={styles.UserTitleName}>
-            {user.user.name[0].toUpperCase() + user.user.name.substr(1)}
+            {/* {user.user.name[0].toUpperCase() + user.user.name.substr(1)} */}
+            Eduardo
           </Text>
         </View>
         

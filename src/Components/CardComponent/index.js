@@ -2,7 +2,6 @@ import { Text, View, TouchableOpacity } from "react-native";
 
 import styles from './styles'
 
-import { useCreditCard } from '../../contexts/CreditCard'
 
 export default function CardComponent({ creditCards, navigation }){
   const { handleInvoceCreditCard } = useCreditCard()

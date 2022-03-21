@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import { View, Text, TouchableOpacity, KeyboardAvoidingView, Platform, Keyboard } from 'react-native';
-import { useAuth } from '../../contexts/Auth'
 
 import Input from '../../Components/Input';
 
 import styles from './styles'
 
 export default function Register({ navigation }) {
-  const { handleRegister } = useAuth()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -40,7 +38,7 @@ export default function Register({ navigation }) {
       email,
       password,
     } 
-    handleRegister(data)
+    navigation.navigate("Login")
   }
 
   const handleError = (error, input) => {

@@ -6,8 +6,6 @@ import Select from '../../Components/Select'
 
 import Loading from '../../screens/Loading'
 
-import { useCreditCard } from '../../contexts/CreditCard'
-
 import styles from './styles'
 
 const banks = ["Itau", "Santander", "Nubank", "Inter", "Bradesco"]
@@ -77,8 +75,7 @@ export default function RegisterCard({ route, navigation }){
       close,
       win,
       bank
-    }
-   
+    }   
     if(update){
       handleUpdateCard(update, data)
       navigation.navigate("Inicio")
@@ -92,12 +89,6 @@ export default function RegisterCard({ route, navigation }){
   const handleError = (error, input) => {
     setErrors(prevState => ({...prevState, [input]: error}));
   };
-
-  if(isLoading){
-    return (
-      <Loading />
-    )    
-  }
   
   return (
     <KeyboardAvoidingView 
@@ -154,7 +145,7 @@ export default function RegisterCard({ route, navigation }){
         />
 
         <TouchableOpacity style={styles.button} onPress={() => validate()}>
-        <Text style={styles.textButton}>Adicionar</Text>
+        <Text style={styles.textButton}>{creditCards ? "Atualizar" : "Adicionar"}</Text>
       </TouchableOpacity>
     </View>    
     </TouchableWithoutFeedback>

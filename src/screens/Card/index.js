@@ -4,9 +4,6 @@ import { AntDesign } from '@expo/vector-icons';
 
 import User from '../../Components/User'
 import CardComponent from '../../Components/CardComponent'
-import TransComponent from '../../Components/TransComponent'
-
-import { useCreditCard } from '../../contexts/CreditCard'
 
 import styles from './styles'
 
@@ -15,7 +12,6 @@ const DATA = [{id: 1}]
 const DATA1 = [{id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}, {id: 6}, {id: 7}, {id: 8}]
 
 export default function Card({ navigation }) {
-  const { creditCards } = useCreditCard() 
 
   return (
    <View style={styles.container}>
@@ -30,7 +26,7 @@ export default function Card({ navigation }) {
      </View>
      <View style={styles.content}>
         <View style={styles.card}>
-       
+{/*        
             <FlatList         
             data={creditCards}
             renderItem={({item}) => (     
@@ -40,7 +36,7 @@ export default function Card({ navigation }) {
             scrollEnabled
             showsHorizontalScrollIndicator={false}          
             keyExtractor={item => item.id}
-          />                    
+          />                     */}
         </View> 
     
           <Text style={styles.transactionTitle}>Recentes Lançamentos</Text>

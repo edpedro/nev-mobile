@@ -7,13 +7,13 @@ import Balance from '../../Components/Balance';
 import CardComponent from '../../Components/CardComponent';
 import TransComponent from '../../Components/TransComponent'
 
-import { useCreditCard } from '../../contexts/CreditCard'
+
 
 const DATA = [{id: 1}]
 const DATA1 = [{id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}, {id: 6}, {id: 7}, {id: 8}]
 
 export default function Home({ navigation }) {
-  const { creditCards } = useCreditCard() 
+
   return (
     <View style={styles.container}>
       <User />
@@ -21,7 +21,7 @@ export default function Home({ navigation }) {
       <View style={styles.content}>
         <Text style={styles.cardTitle}>Cartão de credito</Text>
         <View style={styles.card}>
-          <FlatList         
+          {/* <FlatList         
             data={creditCards}
             renderItem={({item}) => (
               <CardComponent creditCards={item} navigation={navigation}/>
@@ -30,7 +30,7 @@ export default function Home({ navigation }) {
             scrollEnabled
             showsHorizontalScrollIndicator={false}          
             keyExtractor={item => item.id}
-          />        
+          />         */}
         </View>
        
         <Text style={styles.transactionTitle}>Recentes Lançamentos</Text>

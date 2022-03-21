@@ -35,16 +35,16 @@ export default function Input({
         <View style={styles.icon}>
            <TouchableOpacity   onPress={() => setHidePass(!secure)}>
             {secure ?
-              <Ionicons name={iconName} size={30} color="black" />
+              <Ionicons name={iconName} size={30} color="#585858" />
               :
-              <Ionicons name={iconName} size={30} color="black" />
+              <Ionicons name={iconName} size={30} color="#585858" />
             }            
           </TouchableOpacity>
         </View>
         
         :
         <View style={styles.icon}>          
-          <Ionicons name={iconName} size={30} color="black" />          
+          <Ionicons name={iconName} size={30} color="#585858" />          
         </View>     
       }
        
