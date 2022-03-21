@@ -10,14 +10,13 @@ import { navigataionRef } from '../services/navigation'
 const Routes = () => {
   const { loggedState } = useSelector((state) => state.userReduce)
   const { loading } = useSelector((state) => state.loadingReducer)
-  console.log(loggedState)
 
   if(loading){
     return (
       <Loading />
     )    
   }
-  console.log(loading)
+
    return (
     <NavigationContainer ref={navigataionRef}>
      {loggedState ? <AuthStack /> : <AppStack /> } 
