@@ -1,5 +1,6 @@
 import { takeLatest, all, call, put } from 'redux-saga/effects'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import Toast from 'react-native-toast-message';
 import { Alert } from 'react-native'
 
 import types from './types'
@@ -18,8 +19,18 @@ export function* LoginUser({ user }){
     yield put(loginSucess(data)) 
     yield call(navigate, 'Inicio');
 
+    Toast.show({
+      type: 'success',
+      text1: 'Acesso',
+      text2: 'Logado com sucesso'
+    });
+
   } catch (error) {
-    Alert.alert('Erro de acesso!', "Email ou Senha Invalida!");
+    Toast.show({
+      type: 'error',
+      text1: 'Erro de acesso',
+      text2: 'Email ou Senha invalida!'
+    });
   }finally {
     yield put(loading(false));
   }
@@ -27,7 +38,7 @@ export function* LoginUser({ user }){
 export function* Logout(){
   AsyncStorage.removeItem('@data') 
   yield put(logoutSucess()) 
-  yield call(replace, 'Login')
+  yield call(replace, 'Login') 
 }
 
 export default all([
