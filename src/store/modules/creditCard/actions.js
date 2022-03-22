@@ -6,3 +6,6 @@ export function getCards() {
 export function setCards(payload) {
   return { type: types.SET_CARDS, payload }
 }
+export function registerCards(card) {
+  return { type: types.REGISTER_CARD, card }
+}

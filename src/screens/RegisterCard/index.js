@@ -1,17 +1,18 @@
 import { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { Text, View, KeyboardAvoidingView, TouchableOpacity, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native'
 
 import Input from '../../Components/Input'
 import Select from '../../Components/Select'
 
-import Loading from '../../screens/Loading'
+import { registerCards } from '../../store/modules/creditCard/actions'
 
 import styles from './styles'
 
 const banks = ["Itau", "Santander", "Nubank", "Inter", "Bradesco"]
 
 export default function RegisterCard({ route, navigation }){
-  const { handleRegisterCard, isLoading, handleUpdateCard, updateCreditCard } = useCreditCard()
+  const dispatch = useDispatch()
 
   const { creditCards } = route.params || {};
   
@@ -21,22 +22,7 @@ export default function RegisterCard({ route, navigation }){
   const [win, setWin] = useState("")
   const [bank, setBank] = useState("")
 
-  const [update, setUpdate] = useState("")
-
   const [errors, setErrors] = useState({})
-
-  useEffect(() => {     
-    
-    if(creditCards) {
-      setName(creditCards.name)
-      setLimit(creditCards.limit)
-      setClose(creditCards.close)
-      setWin(creditCards.win)
-      setBank(creditCards.bank)
-      setUpdate(creditCards.id)
-      
-    }   
-  }, [creditCards])
  
   function validate(){
     Keyboard.dismiss()
@@ -76,14 +62,7 @@ export default function RegisterCard({ route, navigation }){
       win,
       bank
     }   
-    if(update){
-      handleUpdateCard(update, data)
-      navigation.navigate("Inicio")
-
-    }else{
-      handleRegisterCard(data)
-      navigation.navigate("Inicio")
-    }
+    dispatch(registerCards(data))
   } 
 
   const handleError = (error, input) => {

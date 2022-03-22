@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import Toast from 'react-native-toast-message';
 
 import types from './types'
-import { setCards } from './actions'
+import { setCards, getCards } from './actions'
 import { loading } from '../loading/actions'
 
 import api from '../../../services/api'
@@ -30,7 +30,30 @@ export function* GetCards(){
     });
   }
 }
+export function* RegisterCards({card}){
+  const data = yield AsyncStorage.getItem('@data')
+  const { token } = JSON.parse(data)
+
+  yield put(loading(true));
+
+  try {    
+    yield call(api.post, 'creditCard', card, {
+      headers: {"Authorization" : `Bearer ${token}`}
+    })        
+    yield put(getCards()) 
+    yield navigate('Inicio');
+  } catch (error) {
+    Toast.show({
+      type: 'error',
+      text1: 'Tente novamente!',
+     
+    });
+  }finally {
+    yield put(loading(false));
+  }
+}
 
 export default all([
   takeLatest(types.GET_CARDS, GetCards),
+  takeLatest(types.REGISTER_CARD, RegisterCards),
 ]);
