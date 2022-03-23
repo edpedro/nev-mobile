@@ -17,14 +17,15 @@ const DATA1 = [{id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}, {id: 6}, {id: 7}, {i
 
 export default function Home({ navigation }) {
   const { cards } = useSelector((state) => state.creditCards)
+
   const dispatch = useDispatch()
   
   useEffect(() => {
     dispatch(getCards())
   },[])
-
-  return (
-    <View style={styles.container}>
+  
+   return (
+    <View style={styles.container}>  
       <User />
       <Balance />
       <View style={styles.content}>

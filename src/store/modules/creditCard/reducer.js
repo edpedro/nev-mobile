@@ -2,7 +2,8 @@ import types from './types'
 import produce from 'immer'
 
 const INITIAL_STATE = {
-  cards: {},  
+  cards: {},
+  cardTrans: {},  
 }
 
 function users(state = INITIAL_STATE, action){
@@ -11,7 +12,12 @@ function users(state = INITIAL_STATE, action){
       return produce(state, (draft) => {
         draft.cards = action.payload 
       });
-    }    
+    }
+    case types.SET_CARD_TRANS : {
+      return produce(state, (draft) => {
+        draft.cardTrans = action.payload 
+      });
+    }        
     default:
       return state
   }

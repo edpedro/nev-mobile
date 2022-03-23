@@ -10,7 +10,8 @@ import api from '../../../services/api'
 import { replace, navigate } from '../../../services/navigation'
 
 export function* RegisterUser({ user }){
-
+  yield put(loading(true));
+  
   try {
     const { data } = yield call(api.post, 'users', user)  
 
@@ -33,6 +34,8 @@ export function* RegisterUser({ user }){
       text1: 'Erro de acesso',
       text2: 'Usuario já existe!'
     });
+  }finally {
+    yield put(loading(false));
   }
 }
 

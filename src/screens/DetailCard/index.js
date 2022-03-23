@@ -1,22 +1,31 @@
-import { useState } from 'react'
-import { Text, View, TouchableOpacity, FlatList } from 'react-native'
+import { useEffect, useState } from 'react'
+import { Text, View, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
 
 import User from '../../Components/User'
 import TransComponent from '../../Components/TransComponent'
-import Loading from '../Loading'
 import ModalDelete from '../../Components/ModalDelete'
+
+import { getCardTrans } from '../../store/modules/creditCard/actions'
 
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
 import styles from './styles'
 
 export default function DetailCard({route, navigation }){ 
+  const { cardTrans } = useSelector((state) => state.creditCards)
+
   const [modalVisible, setModalVisible] = useState(false);
+  const dispatch = useDispatch()
 
   const { creditCards } = route.params;
   const {id, bank, close, win, limit, cardBalance} = creditCards
+ 
+  useEffect(() => {
+    dispatch(getCardTrans(id))
+  },[id])
 
-    return (
+  return (
     <View style={styles.container}>
       <User /> 
 
@@ -67,10 +76,10 @@ export default function DetailCard({route, navigation }){
             </TouchableOpacity>           
           </View>         
         </View>  
-        </View>
-        {/* {invoceCreditCard && invoceCreditCard.length > 0 ?
+        </View>      
+        {cardTrans && cardTrans.length > 0 ?
           <FlatList         
-            data={invoceCreditCard}
+            data={cardTrans}
             renderItem={({item}) =>                 
               <TransComponent invoceCreditCard={item}/>                            
             }        
@@ -82,7 +91,7 @@ export default function DetailCard({route, navigation }){
           <View style={styles.notRelease}>
             <Text style={styles.notReleaseTitle}>Sem lançamentos</Text>     
           </View>          
-        }   */}
+        }  
         {modalVisible && 
           <ModalDelete 
             idCard={id} 

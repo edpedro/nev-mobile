@@ -1,10 +1,15 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#058373',
-    alignItems: 'center',    
+  container: {   
+    position: "absolute",
+    top: 0,
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    backgroundColor: '#058373',    
+    zIndex: 1,
+    elevation: 1  
   },
   logo: {   
     marginTop: 120,

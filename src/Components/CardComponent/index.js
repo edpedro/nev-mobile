@@ -5,7 +5,7 @@ import styles from './styles'
 
 export default function CardComponent({ creditCards, navigation }){ 
   const { id, bank, close, win, limit, cardBalance } = creditCards  
-  console.log(creditCards)
+  
   return (
     <View style={styles.container}>
       <View style={styles.contentHeader}>
@@ -31,8 +31,7 @@ export default function CardComponent({ creditCards, navigation }){
           }).format(limit - cardBalance)}</Text>     
         </View>
       </View>
-      <TouchableOpacity style={styles.viewInvoice} onPress={() => {  
-          handleInvoceCreditCard(id),    
+      <TouchableOpacity style={styles.viewInvoice} onPress={() => { 
           navigation.navigate('DetailCard', {
             creditCards          
           });

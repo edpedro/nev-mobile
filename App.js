@@ -1,6 +1,7 @@
 import AppLoading from 'expo-app-loading';
 import { useFonts, Inter_900Black } from '@expo-google-fonts/inter';
 import Routes from "./src/routes";
+import Loading from './src/screens/Loading';
 
 import Toast from 'react-native-toast-message'
 
@@ -10,6 +11,7 @@ import store from './src/store'
 import 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
 import 'moment/locale/pt-br'
+
 
 export default function App() {
 
@@ -23,8 +25,9 @@ export default function App() {
 
   return (
     <>
-      <Provider store={store}>
-        <Routes/>
+      <Provider store={store}> 
+        <Loading />      
+        <Routes/>        
         <Toast />
       </Provider>    
     </>
