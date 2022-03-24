@@ -5,7 +5,7 @@ import { Text, View, KeyboardAvoidingView, TouchableOpacity, Platform, Touchable
 import Input from '../../Components/Input'
 import Select from '../../Components/Select'
 
-import { registerCards } from '../../store/modules/creditCard/actions'
+import { registerCards, updateCard } from '../../store/modules/creditCard/actions'
 
 import styles from './styles'
 
@@ -14,7 +14,7 @@ const banks = ["Itau", "Santander", "Nubank", "Inter", "Bradesco"]
 export default function RegisterCard({ route, navigation }){
   const dispatch = useDispatch()
 
-  const { creditCards } = route.params || {};
+  const { filterCard } = route.params || {};
   
   const [name, setName] = useState("")
   const [limit, setLimit] = useState("")
@@ -23,7 +23,19 @@ export default function RegisterCard({ route, navigation }){
   const [bank, setBank] = useState("")
 
   const [errors, setErrors] = useState({})
- 
+
+  useEffect(() => {
+
+    if(filterCard){
+      setName(filterCard[0].name)
+      setLimit(filterCard[0].limit)
+      setClose(filterCard[0].close)
+      setWin(filterCard[0].win)
+      setBank(filterCard[0].bank)
+    }
+
+  }, [filterCard])
+
   function validate(){
     Keyboard.dismiss()
     let isValid = true
@@ -61,8 +73,15 @@ export default function RegisterCard({ route, navigation }){
       close,
       win,
       bank
-    }   
-    dispatch(registerCards(data))
+    }
+
+    if(filterCard){
+      dispatch(updateCard(data, filterCard[0].id))
+      navigation.navigate("DetailCard")
+    }else {     
+      dispatch(registerCards(data))
+      navigation.navigate("Home")
+    }    
   } 
 
   const handleError = (error, input) => {
@@ -124,7 +143,7 @@ export default function RegisterCard({ route, navigation }){
         />
 
         <TouchableOpacity style={styles.button} onPress={() => validate()}>
-        <Text style={styles.textButton}>{creditCards ? "Atualizar" : "Adicionar"}</Text>
+        <Text style={styles.textButton}>{filterCard ? "Atualizar" : "Adicionar"}</Text>
       </TouchableOpacity>
     </View>    
     </TouchableWithoutFeedback>

@@ -12,18 +12,21 @@ import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
 import styles from './styles'
 
-export default function DetailCard({route, navigation }){ 
-  const { cardTrans } = useSelector((state) => state.creditCards)
+export default function DetailCard({ id, navigation }){ 
+  const { cardTrans, card, cards } = useSelector((state) => state.creditCards)
 
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch()
 
-  const { creditCards } = route.params;
-  const {id, bank, close, win, limit, cardBalance} = creditCards
+  // const { creditCards } = route.params;
+  // const {id, bank, close, win, limit, cardBalance} = creditCards
  
-  useEffect(() => {
-    dispatch(getCardTrans(id))
-  },[id])
+  // useEffect(() => {
+  //   dispatch(getCardTrans(id))
+  // },[id])
+  const filterCard = cards.filter((item) => {
+    return item.id === card.id
+  })
 
   return (
     <View style={styles.container}>
@@ -36,17 +39,17 @@ export default function DetailCard({route, navigation }){
           <FontAwesome name="credit-card" size={25} color="black" />
         </View>
 
-        <Text style={styles.detailTitle}>{bank}</Text>
+        <Text style={styles.detailTitle}>{filterCard[0].bank}</Text>
 
         <View style={styles.detailBody}>          
-          <Text style={styles.contentTitle}>{win} Vencimento | {close} Fechamento</Text>
+          <Text style={styles.contentTitle}>{filterCard[0].win} Vencimento | {filterCard[0].close} Fechamento</Text>
           <View style={styles.contenInvoice}>
             <Text style={styles.invoiceTitle}>Fatura</Text>
             <Text style={styles.invoiceValue}>  
             {Intl.NumberFormat('pt-BR', { 
             style: 'currency', 
             currency: 'BRL',
-          }).format(cardBalance)}
+          }).format(filterCard[0].cardBalance)}
           </Text>
           </View>
           <View style={styles.contentLimit}>
@@ -55,7 +58,7 @@ export default function DetailCard({route, navigation }){
               {Intl.NumberFormat('pt-BR', { 
               style: 'currency', 
               currency: 'BRL',
-            }).format(limit - cardBalance)}
+            }).format(filterCard[0].limit - filterCard[0].cardBalance)}
            </Text>         
           </View>          
         </View>
@@ -64,7 +67,7 @@ export default function DetailCard({route, navigation }){
           <View style={styles.iconEdit}>
             <TouchableOpacity onPress={() => {      
               navigation.navigate('RegisterCard', {
-                creditCards        
+                filterCard        
               });
            }}>
               <MaterialIcons name="mode-edit" size={35} color="black" />
