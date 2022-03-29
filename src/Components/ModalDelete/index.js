@@ -1,9 +1,16 @@
 import { Modal, Text, TouchableOpacity, View } from "react-native";
+import { useDispatch } from 'react-redux'
+
+import { deleteCard } from '../../store/modules/creditCard/actions'
 
 import styles from './styles'
 
 export default function ModalDelete({ modalVisible, setModalVisible, idCard, navigation }) {
-  const { handleDeleteCard } = useCreditCard()
+  const dispatch = useDispatch()
+
+  function handleDeleteCard(){
+    dispatch(deleteCard(idCard))
+  }
 
   return (
     <View style={styles.centeredView}>
@@ -27,9 +34,8 @@ export default function ModalDelete({ modalVisible, setModalVisible, idCard, nav
             </TouchableOpacity>
             <TouchableOpacity            
               onPress={() => {
-                handleDeleteCard(idCard),
-                setModalVisible(!modalVisible),                
-                navigation.navigate('Card');
+                handleDeleteCard(),
+                setModalVisible(!modalVisible)             
               }}
             >
               <Text style={styles.textStyle}>Deletar</Text>

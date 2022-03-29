@@ -66,7 +66,13 @@ export function* RegisterCards({card}){
       headers: {"Authorization" : `Bearer ${token}`}
     })        
     yield put(getCards()) 
-
+    yield navigate('Card')
+    Toast.show({
+      type: 'success',
+      text1: 'Cartão de credito',
+      text2: 'Cadastro feito com sucesso'
+    });
+  
   } catch (error) {
     Toast.show({
       type: 'error',
@@ -109,7 +115,39 @@ export function* UpdateCard({ card, id }){
       headers: {"Authorization" : `Bearer ${token}`}
     })       
     
+    yield put(getCards())
+    
+    Toast.show({
+      type: 'success',
+      text1: 'Cartão de credito',
+      text2: 'Atualizado com sucesso'
+    });
+    
+  } catch (error) {
+    Toast.show({
+      type: 'error',
+      text1: 'Tente novamente!',
+     
+    });
+  }
+}
+
+export function* DeleteCard({ id }){
+  const data = yield AsyncStorage.getItem('@data')
+  const { token } = JSON.parse(data)
+
+  try {    
+    yield call(api.delete, `creditCard/${id}`,{
+      headers: {"Authorization" : `Bearer ${token}`}
+    })       
+    
     yield put(getCards()) 
+    yield navigate('Card');
+    Toast.show({
+      type: 'success',
+      text1: 'Cartão de credito',
+      text2: 'Deletado com sucesso'
+    });
     
   } catch (error) {
     Toast.show({
@@ -126,4 +164,5 @@ export default all([
   takeLatest(types.REGISTER_CARD, RegisterCards),
   takeLatest(types.GET_CARD_TRANS, GetCardTrans),
   takeLatest(types.UPDATE_CARD, UpdateCard),
+  takeLatest(types.DELETE_CARD, DeleteCard),
 ]);

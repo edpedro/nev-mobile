@@ -4,7 +4,8 @@ const types = {
   SET_CARDS: "@creditCard/SET_CARDS",
   GET_CARD: "@creditCard/GET_CARD",
   SET_CARD: "@creditCard/SET_CARD",
-  UPDATE_CARD: "@creditCard/UPDATE_CARD",  
+  UPDATE_CARD: "@creditCard/UPDATE_CARD",
+  DELETE_CARD: "@creditCard/DELETE_CARD",   
   GET_CARD_TRANS: "@creditCard/GET_CARD_TRANS",
   SET_CARD_TRANS: "@creditCard/SET_CARD_TRANS",  
 }

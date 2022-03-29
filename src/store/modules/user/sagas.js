@@ -7,7 +7,7 @@ import { loginSucess, logoutSucess, loginUser } from './actions'
 import { loading } from '../loading/actions'
 
 import api from '../../../services/api'
-import { replace, navigate } from '../../../services/navigation'
+import {  navigate } from '../../../services/navigation'
 
 export function* RegisterUser({ user }){
   yield put(loading(true));
@@ -46,8 +46,7 @@ export function* LoginUser({ user }){
     const { data } = yield call(api.post, 'sessions', user)
 
     AsyncStorage.setItem('@data', JSON.stringify(data)) 
-    yield put(loginSucess(data)) 
-    yield call(navigate, 'Inicio');
+    yield put(loginSucess(data))    
 
     Toast.show({
       type: 'success',
@@ -66,9 +65,9 @@ export function* LoginUser({ user }){
   }
 }
 export function* Logout(){
-  AsyncStorage.removeItem('@data') 
-  yield put(logoutSucess()) 
-  yield call(replace, 'Login') 
+  yield AsyncStorage.removeItem('@data') 
+  yield put(logoutSucess())
+  
 }
 
 export default all([

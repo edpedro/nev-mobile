@@ -10,11 +10,13 @@ import { registerCards, updateCard } from '../../store/modules/creditCard/action
 import styles from './styles'
 
 const banks = ["Itau", "Santander", "Nubank", "Inter", "Bradesco"]
+const days = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15",
+"16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"]
 
 export default function RegisterCard({ route, navigation }){
   const dispatch = useDispatch()
 
-  const { filterCard } = route.params || {};
+  const { cardFilter } = route.params || {};
   
   const [name, setName] = useState("")
   const [limit, setLimit] = useState("")
@@ -26,15 +28,15 @@ export default function RegisterCard({ route, navigation }){
 
   useEffect(() => {
 
-    if(filterCard){
-      setName(filterCard[0].name)
-      setLimit(filterCard[0].limit)
-      setClose(filterCard[0].close)
-      setWin(filterCard[0].win)
-      setBank(filterCard[0].bank)
+    if(cardFilter){
+      setName(cardFilter.name)
+      setLimit(cardFilter.limit)
+      setClose(cardFilter.close)
+      setWin(cardFilter.win)
+      setBank(cardFilter.bank)
     }
 
-  }, [filterCard])
+  }, [cardFilter])
 
   function validate(){
     Keyboard.dismiss()
@@ -75,19 +77,18 @@ export default function RegisterCard({ route, navigation }){
       bank
     }
 
-    if(filterCard){
-      dispatch(updateCard(data, filterCard[0].id))
-      navigation.navigate("DetailCard")
+    if(cardFilter){
+      dispatch(updateCard(data, cardFilter.id))
+      navigation.navigate("Card")
     }else {     
-      dispatch(registerCards(data))
-      navigation.navigate("Home")
+      dispatch(registerCards(data))     
     }    
   } 
 
   const handleError = (error, input) => {
     setErrors(prevState => ({...prevState, [input]: error}));
   };
-  
+ 
   return (
     <KeyboardAvoidingView 
     behavior={Platform.OS === "ios" ? "padding" : "height"}   
@@ -110,24 +111,28 @@ export default function RegisterCard({ route, navigation }){
           name={limit} 
           setData={setLimit}
           onFocus={() => handleError(null, 'limit')}
-        />
-        <Input 
+        />         
+        <Select 
           title="Fechar dia" 
-          error={errors.close} 
-          maxLength={2} 
-          keyboardType="numeric" 
-          name={close} 
-          setData={setClose}
-          onFocus={() => handleError(null, 'close')}
-        />
-        <Input 
+          text={"Selecione o dia"} 
+          value={close}
+          options={days} 
+          error={errors.close}
+          onChangeSelect={(item) => {
+            setClose(item) 
+            handleError(null, 'close')         
+          }}         
+        />     
+        <Select 
           title="Vence dia" 
-          error={errors.win} 
-          maxLength={2} 
-          keyboardType="numeric" 
-          name={win} 
-          setData={setWin}
-          onFocus={() => handleError(null, 'win')}
+          text={"Selecione o dia"} 
+          value={win}
+          options={days} 
+          error={errors.win}
+          onChangeSelect={(item) => {
+            setWin(item) 
+            handleError(null, 'win')         
+          }}         
         />
        
         <Select 
@@ -143,7 +148,7 @@ export default function RegisterCard({ route, navigation }){
         />
 
         <TouchableOpacity style={styles.button} onPress={() => validate()}>
-        <Text style={styles.textButton}>{filterCard ? "Atualizar" : "Adicionar"}</Text>
+        <Text style={styles.textButton}>{cardFilter ? "Atualizar" : "Adicionar"}</Text>
       </TouchableOpacity>
     </View>    
     </TouchableWithoutFeedback>

@@ -18,6 +18,9 @@ export function registerCards(card) {
 export function updateCard(card, id) {
   return { type: types.UPDATE_CARD, card, id }
 }
+export function deleteCard(id) {
+  return { type: types.DELETE_CARD, id }
+}
 export function getCardTrans(id) {
   return { type: types.GET_CARD_TRANS, id }
 }

@@ -1,9 +1,12 @@
 import { View, Text, FlatList, TouchableOpacity } from 'react-native'
+import { useSelector } from 'react-redux'
 
 import { AntDesign } from '@expo/vector-icons'; 
 
 import User from '../../Components/User'
 import CardComponent from '../../Components/CardComponent'
+
+import { getCards } from '../../store/modules/creditCard/actions'
 
 import styles from './styles'
 
@@ -12,6 +15,7 @@ const DATA = [{id: 1}]
 const DATA1 = [{id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}, {id: 6}, {id: 7}, {id: 8}]
 
 export default function Card({ navigation }) {
+  const { cards } = useSelector((state) => state.creditCards)
 
   return (
    <View style={styles.container}>
@@ -26,9 +30,9 @@ export default function Card({ navigation }) {
      </View>
      <View style={styles.content}>
         <View style={styles.card}>
-{/*        
+       
             <FlatList         
-            data={creditCards}
+            data={cards}
             renderItem={({item}) => (     
               <CardComponent creditCards={item} navigation={navigation}/>
             )}
@@ -36,7 +40,7 @@ export default function Card({ navigation }) {
             scrollEnabled
             showsHorizontalScrollIndicator={false}          
             keyExtractor={item => item.id}
-          />                     */}
+          />                    
         </View> 
     
           <Text style={styles.transactionTitle}>Recentes Lançamentos</Text>

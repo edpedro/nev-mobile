@@ -1,7 +1,4 @@
 import { Text, View, TouchableOpacity } from "react-native";
-import { useDispatch } from 'react-redux'
-
-import { getCard, getCardTrans } from '../../store/modules/creditCard/actions'
 
 import styles from './styles'
 
@@ -9,13 +6,6 @@ import styles from './styles'
 export default function CardComponent({ creditCards, navigation }){ 
   const { id, bank, close, win, limit, cardBalance } = creditCards  
 
-  const dispatch = useDispatch()
-
-  function handleGetCard(){
-    dispatch(getCard(id))
-    dispatch(getCardTrans(id))
-  }
-  
   return (
     <View style={styles.container}>
       <View style={styles.contentHeader}>
@@ -41,9 +31,10 @@ export default function CardComponent({ creditCards, navigation }){
           }).format(limit - cardBalance)}</Text>     
         </View>
       </View>
-      <TouchableOpacity style={styles.viewInvoice} onPress={() => { 
-          navigation.navigate('DetailCard'),
-          handleGetCard()
+      <TouchableOpacity style={styles.viewInvoice} onPress={() => {
+          navigation.navigate('DetailCard', {
+            id
+          })          
         }}>
           <Text style={styles.viewInvoiceText}>ver fatura</Text>
       </TouchableOpacity>

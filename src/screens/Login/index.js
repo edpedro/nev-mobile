@@ -5,9 +5,9 @@ import { View, Text, TouchableOpacity, KeyboardAvoidingView, Platform, Touchable
 import Input from '../../Components/Input';
 import Loading from '../Loading'
 
-import { loginUser, authUser } from '../../store/modules/user/actions'
-
 import { replace } from '../../services/navigation'
+
+import { loginUser, authUser } from '../../store/modules/user/actions'
 
 import styles from './styles'
 
@@ -28,11 +28,9 @@ export default function Login({ navigation }) {
     const user = await AsyncStorage.getItem('@data') 
  
     if(!user){
-      setLoggedState(true);
-      replace('Login');
+      setLoggedState(true);    
     }else {
       dispatch(authUser('user', JSON.parse(user)))
-      replace('Home');
      }
    }  
    

@@ -1,34 +1,38 @@
 import { useEffect, useState } from 'react'
-import { Text, View, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native'
-import { useDispatch, useSelector } from 'react-redux'
+import { Text, View, TouchableOpacity, FlatList } from 'react-native'
+import { useSelector, useDispatch } from 'react-redux'
 
 import User from '../../Components/User'
 import TransComponent from '../../Components/TransComponent'
 import ModalDelete from '../../Components/ModalDelete'
 
-import { getCardTrans } from '../../store/modules/creditCard/actions'
+import { getCard, getCardTrans } from '../../store/modules/creditCard/actions'
 
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
 import styles from './styles'
 
-export default function DetailCard({ id, navigation }){ 
-  const { cardTrans, card, cards } = useSelector((state) => state.creditCards)
-
-  const [modalVisible, setModalVisible] = useState(false);
+export default function DetailCard({ route, navigation }){ 
+  const { cardTrans, cards } = useSelector((state) => state.creditCards)
   const dispatch = useDispatch()
 
-  // const { creditCards } = route.params;
-  // const {id, bank, close, win, limit, cardBalance} = creditCards
- 
-  // useEffect(() => {
-  //   dispatch(getCardTrans(id))
-  // },[id])
-  const filterCard = cards.filter((item) => {
-    return item.id === card.id
-  })
+  const [modalVisible, setModalVisible] = useState(false);
+  const [cardFilter, setCardFilter] = useState({})
 
-  return (
+  const { id } = route.params || {} 
+
+  useEffect(() => {
+    dispatch(getCard(id))
+    dispatch(getCardTrans(id))
+
+     const filterCard  = cards.filter((item) => {
+        return item.id === id
+      })
+  
+      setCardFilter(filterCard[0])
+  },[id]) 
+
+    return (
     <View style={styles.container}>
       <User /> 
 
@@ -37,19 +41,19 @@ export default function DetailCard({ id, navigation }){
 
         <View style={styles.iconCard}>
           <FontAwesome name="credit-card" size={25} color="black" />
-        </View>
-
-        <Text style={styles.detailTitle}>{filterCard[0].bank}</Text>
+        </View>    
+ 
+        <Text style={styles.detailTitle}>{cardFilter.bank}</Text>
 
         <View style={styles.detailBody}>          
-          <Text style={styles.contentTitle}>{filterCard[0].win} Vencimento | {filterCard[0].close} Fechamento</Text>
+          <Text style={styles.contentTitle}>{cardFilter.win} Vencimento | {cardFilter.close} Fechamento</Text>
           <View style={styles.contenInvoice}>
             <Text style={styles.invoiceTitle}>Fatura</Text>
             <Text style={styles.invoiceValue}>  
             {Intl.NumberFormat('pt-BR', { 
             style: 'currency', 
             currency: 'BRL',
-          }).format(filterCard[0].cardBalance)}
+          }).format(cardFilter.cardBalance)}
           </Text>
           </View>
           <View style={styles.contentLimit}>
@@ -58,7 +62,7 @@ export default function DetailCard({ id, navigation }){
               {Intl.NumberFormat('pt-BR', { 
               style: 'currency', 
               currency: 'BRL',
-            }).format(filterCard[0].limit - filterCard[0].cardBalance)}
+            }).format(cardFilter.limit - cardFilter.cardBalance)}
            </Text>         
           </View>          
         </View>
@@ -67,18 +71,21 @@ export default function DetailCard({ id, navigation }){
           <View style={styles.iconEdit}>
             <TouchableOpacity onPress={() => {      
               navigation.navigate('RegisterCard', {
-                filterCard        
+                cardFilter 
               });
            }}>
               <MaterialIcons name="mode-edit" size={35} color="black" />
             </TouchableOpacity>            
           </View>
           <View style={styles.iconRemove}>
-            <TouchableOpacity onPress={() => setModalVisible(true)} >
+            <TouchableOpacity onPress={() => {
+              setModalVisible(true)              
+              }} >
               <MaterialIcons name="delete-forever" size={35} color="black" />
             </TouchableOpacity>           
           </View>         
         </View>  
+  
         </View>      
         {cardTrans && cardTrans.length > 0 ?
           <FlatList         

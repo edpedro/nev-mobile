@@ -5,22 +5,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#058373',
     justifyContent: "center",
-    alignItems: "center" 
+    
   },  
   content: {
-    marginTop: 30,   
+    alignItems: "center",   
   },
   title: {    
     marginBottom: 20,
     fontSize: 28,
     fontWeight: 'bold',
     color: "#ffff",
-    marginLeft: 30
+    alignItems: "center",
+    marginTop: 30
   },
   grid: { 
-    flexDirection: "row",   
-    marginBottom: 10,
-    marginLeft: 60    
+    flexDirection: "row", 
+    alignItems: "center",
   },
   income: {
     width: 100,
@@ -49,13 +49,11 @@ const styles = StyleSheet.create({
     color: "#000"
   },
   acountCardTitle:{  
-    marginLeft: 12,
-    marginTop: 8,
-    color: "#fff" 
+    marginLeft: 12,   
+    color: "#fff",  
   },
   acountCard: {
-    flexDirection: "row",
-    alignItems: "flex-start"
+    flexDirection: "row",  
   },
   card: {
     width: 60,
@@ -66,7 +64,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginRight: 10,
     marginLeft: 10,
-    marginTop: 10
+    marginTop: 5
   },
   cardTitle: {
     fontSize: 10,
@@ -78,12 +76,12 @@ const styles = StyleSheet.create({
    },
    button:{
      justifyContent: "center",
-     alignItems: "center",
-    
-     marginLeft: 80,
-     marginTop: 10,
+     alignItems: "center",    
+
+     marginBottom: 10,
+     marginTop: 10,  
      width: 192,
-     height: 58,
+     height: 50,
      borderRadius: 20,
  
      backgroundColor: "#ffff",
@@ -107,7 +105,15 @@ const styles = StyleSheet.create({
    },
    selectedOperation: {
     backgroundColor: "#D8D8D8"
-   }
+   },
+   ErrorTitle: {
+    marginTop: 5, 
+    color: '#fff', 
+    fontSize: 10,    
+  },
+  datePickerStyle: {
+    width: 230,
+  },
 });
 
 export default styles
