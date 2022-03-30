@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Text, View, KeyboardAvoidingView, TouchableOpacity, Platform, TouchableWithoutFeedback, Keyboard, ScrollView } from 'react-native'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment';
 
 import { AntDesign, Entypo, MaterialIcons } from '@expo/vector-icons';
@@ -8,6 +8,8 @@ import { AntDesign, Entypo, MaterialIcons } from '@expo/vector-icons';
 import Input from '../../Components/Input'
 import Select from '../../Components/Select';
 import InputDatePicker from '../../Components/InputDatePicker';
+
+import { registerTransaction } from '../../store/modules/transaction/actions'
 
 import styles from './styles'
 
@@ -21,6 +23,7 @@ const categorys = ["Alimentação", "Assinaturas e serviços", "Bares e restaura
 
 export default function RegisterRelease(){
   const { cards } = useSelector((state) => state.creditCards)
+  const dispatch = useDispatch()
 
   const [description, setDescription] = useState("")
   const [value, setValue] = useState("")  
@@ -54,10 +57,12 @@ export default function RegisterRelease(){
       handleError("Por favor insira a operação", 'operation')
       isValid = false
     }
-    if(!card){
-      handleError("Por favor insira banco", 'card')
-      isValid = false
-    }
+    if(operation === "cartao"){
+      if(!card){
+        handleError("Por favor insira banco", 'card')
+        isValid = false
+      }
+    }   
     if(!data){
       handleError("Por favor insira data", 'data')
       isValid = false
@@ -86,6 +91,7 @@ export default function RegisterRelease(){
 
   function handleSubmit(){  
     const newDate = moment(data).format("YYYY-MM-DD")
+
     const dataForm = {
       description,
       value,
@@ -95,8 +101,10 @@ export default function RegisterRelease(){
       type,
       creditCard
     }
-    console.log(dataForm)
+    console.log(creditCard)
+    dispatch(registerTransaction(dataForm))
   }
+
   useEffect(() => {
     FilterOperation()
     FilterCardName()
