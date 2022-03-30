@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Text, View, KeyboardAvoidingView, TouchableOpacity, Platform, TouchableWithoutFeedback, Keyboard, ScrollView } from 'react-native'
 import { useSelector } from 'react-redux'
+import moment from 'moment';
 
 import { AntDesign, Entypo, MaterialIcons } from '@expo/vector-icons';
 
@@ -19,7 +20,7 @@ const categorys = ["Alimentação", "Assinaturas e serviços", "Bares e restaura
 ]
 
 export default function RegisterRelease(){
-  const { cards, cardsName } = useSelector((state) => state.creditCards)
+  const { cards } = useSelector((state) => state.creditCards)
 
   const [description, setDescription] = useState("")
   const [value, setValue] = useState("")  
@@ -31,7 +32,8 @@ export default function RegisterRelease(){
   const [data, setData] = useState(new Date())
 
   const [errors, setErrors] = useState({})
- 
+
+  const [cardsName, setCardName] = useState("") 
 
   function validate(){
     Keyboard.dismiss()
@@ -83,11 +85,11 @@ export default function RegisterRelease(){
   }
 
   function handleSubmit(){  
-
+    const newDate = moment(data).format("YYYY-MM-DD")
     const dataForm = {
       description,
       value,
-      data,
+      data: newDate,
       category,
       operation,
       type,
@@ -96,17 +98,31 @@ export default function RegisterRelease(){
     console.log(dataForm)
   }
   useEffect(() => {
+    FilterOperation()
+    FilterCardName()
+  }, [operation, card])
+
+  function FilterOperation(){
     if(operation === "cartao"){
-      const filterCard  = cards.filter((item) => {
+      const filterCard = cards.filter((item) => {
       return item.bank === card
     })
+    if(filterCard[0]){
       setCreditCard(filterCard[0].id)
+    }
+      
     }else{
       setCreditCard(null)
-    }     
-    
-  }, [operation])
+    }  
+  }
 
+  function FilterCardName(){
+    const banks = []
+    for (let index = 0; index < cards.length; index++) {            
+      banks.push(cards[index].bank)
+    }
+    setCardName(banks)
+  }
   return (
     <KeyboardAvoidingView 
     behavior={Platform.OS === "ios" ? "padding" : "height"}   
@@ -161,6 +177,7 @@ export default function RegisterRelease(){
           <Input 
             title="Valor" 
             error={errors.value} 
+            keyboardType='numeric'
             name={value} 
             setData={setValue}
             onFocus={() => handleError(null, 'value')}

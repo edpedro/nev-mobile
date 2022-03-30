@@ -7,7 +7,7 @@ const types = {
   UPDATE_CARD: "@creditCard/UPDATE_CARD",
   DELETE_CARD: "@creditCard/DELETE_CARD",   
   GET_CARD_TRANS: "@creditCard/GET_CARD_TRANS",
-  SET_CARD_TRANS: "@creditCard/SET_CARD_TRANS",  
+  SET_CARD_TRANS: "@creditCard/SET_CARD_TRANS", 
 }
 
 export default types

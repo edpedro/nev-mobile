@@ -98,10 +98,10 @@ const styles = StyleSheet.create({
      backgroundColor: "#81C3BA"
    },
    selectedTypeTitle:{
-    color: "#fff"
+    color: "#000"
    },
    selectedTypeIcon: {
-     color: "#fff",
+     
    },
    selectedOperation: {
     backgroundColor: "#D8D8D8"
