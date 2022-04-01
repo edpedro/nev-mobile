@@ -14,11 +14,11 @@ export default function TransComponent({ invoceCreditCard }){
      <View style={styles.iconCardCircle}>
       <FontAwesome name="credit-card" size={18} color="black" />
      </View>
-
+    
      <View style={styles.content}>
        <Text style={styles.contentTitle}>{category}</Text>
        <View style={styles.contentData}>
-         <Text>{moment(data).format('MMM MM-YYYY')}</Text>
+         <Text>{moment(data).format('MMM DD-YYYY')}</Text>
           <View style={styles.contentCircle}></View>
          <Text>{operation}</Text>
        </View>       
@@ -28,14 +28,14 @@ export default function TransComponent({ invoceCreditCard }){
       <Entypo name="circle" size={12} color={type === "despesa" ? "red" : "#058373"} />
      </View>
 
-     <View>
-       <Text style={styles.valueText}>
+   
+      <Text style={styles.valueText}>
         {type === "despesa" ? "-": "+"}{" "}
-       {Intl.NumberFormat('pt-BR', { 
+        {Intl.NumberFormat('pt-BR', { 
             style: 'currency', 
             currency: 'BRL',
-          }).format(value)}</Text>
-     </View>
+          }).format(value)}
+      </Text>
     </View>
   ) 
 }

@@ -10,18 +10,17 @@ import CardComponent from '../../Components/CardComponent';
 import TransComponent from '../../Components/TransComponent'
 
 import { getCards } from '../../store/modules/creditCard/actions'
-
-
-const DATA = [{id: 1}]
-const DATA1 = [{id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}, {id: 6}, {id: 7}, {id: 8}]
+import { getTransactions } from '../../store/modules/transaction/actions'
 
 export default function Home({ navigation }) {
   const { cards } = useSelector((state) => state.creditCards)
+  const { trans: { transactions } } = useSelector((state) => state.transactions)
 
   const dispatch = useDispatch()
   
   useEffect(() => {
     dispatch(getCards())
+    dispatch(getTransactions())
   },[])
   
    return (
@@ -44,15 +43,15 @@ export default function Home({ navigation }) {
         </View>
        
         <Text style={styles.transactionTitle}>Recentes Lançamentos</Text>
-        {/* <FlatList         
-            data={DATA1}
+        <FlatList         
+            data={transactions}
             renderItem={({item}) => (
-              <TransComponent />
+              <TransComponent invoceCreditCard={item}/>
             )}        
             scrollEnabled
             showsHorizontalScrollIndicator={false}          
             keyExtractor={item => item.id}
-          />        */}
+          />       
       </View>
     </View>
   );

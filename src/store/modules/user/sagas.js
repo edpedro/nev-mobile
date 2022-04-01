@@ -44,8 +44,9 @@ export function* LoginUser({ user }){
   yield put(loading(true));
   try {
     const { data } = yield call(api.post, 'sessions', user)
-
+ 
     AsyncStorage.setItem('@data', JSON.stringify(data)) 
+    
     yield put(loginSucess(data))    
 
     Toast.show({
@@ -55,6 +56,7 @@ export function* LoginUser({ user }){
     });
 
   } catch (error) {
+    console.log(error)
     Toast.show({
       type: 'error',
       text1: 'Erro de acesso',

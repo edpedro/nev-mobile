@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     flexDirection: "row",
-    alignItems: 'center'    
+    alignItems: 'center',        
   }, 
   iconCardCircle:{
     width: 45,
@@ -17,9 +17,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     
-  },
+  }, 
   content:{
-    marginLeft: 10,
+    marginLeft: 10,   
+    width: 150
   },
   contentTitle:{
     fontSize: 14,
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
     marginRight: 4,
   
   },
-  circle:{
+  circle:{    
     marginLeft: 30,
     marginRight: 30
   },

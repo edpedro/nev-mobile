@@ -101,7 +101,7 @@ export default function RegisterRelease(){
       type,
       creditCard
     }
-    console.log(creditCard)
+    console.log(dataForm)
     dispatch(registerTransaction(dataForm))
   }
 

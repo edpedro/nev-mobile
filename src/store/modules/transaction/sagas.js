@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import Toast from 'react-native-toast-message';
 
 import types from './types'
-import { setTransactions } from './actions'
+import { setTransactions, getTransactions } from './actions'
 import { loading } from '../loading/actions'
 
 import api from '../../../services/api'
@@ -16,11 +16,11 @@ export function* GetTransaction(){
   yield put(loading(true));
  
   try {
-    const { data } = yield call(api.get, 'creditCard', mes, {
+    const { data } = yield call(api.get, 'transaction',{
       headers: {"Authorization" : `Bearer ${token}`}
     })        
-    yield put(setTransactions(data)) 
-    console.log(data)
+    yield put(setTransactions(data))
+  
   } catch (error) {
     Toast.show({
       type: 'error',
@@ -57,14 +57,15 @@ export function* GetCard({ id }){
 export function* RegisterTransaction({ transaction }){
   const data = yield AsyncStorage.getItem('@data')
   const { token } = JSON.parse(data) 
-  console.log(transaction)
+
   try {    
-    const {data} = yield call(api.post, 'transaction', transaction, {
+    yield call(api.post, 'transaction', transaction, {
       headers: {"Authorization" : `Bearer ${token}`}
-    })        
-    // yield put(getCards()) 
-    console.log(data)
+    })    
+
+    yield put(getTransactions())
     yield navigate('Inicio')
+
     Toast.show({
       type: 'success',
       text1: 'Transação',
@@ -72,6 +73,7 @@ export function* RegisterTransaction({ transaction }){
     });
   
   } catch (error) {
+    console.log(error)
     Toast.show({
       type: 'error',
       text1: 'Tente novamente!',
