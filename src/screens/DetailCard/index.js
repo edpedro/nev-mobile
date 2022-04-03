@@ -91,7 +91,7 @@ export default function DetailCard({ route, navigation }){
           <FlatList         
             data={cardTrans}
             renderItem={({item}) =>                 
-              <TransComponent invoceCreditCard={item}/>                            
+              <TransComponent invoceCreditCard={item} navigation={navigation}/>                            
             }        
             scrollEnabled
             showsHorizontalScrollIndicator={false}          

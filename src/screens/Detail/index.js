@@ -1,34 +1,55 @@
+import { useEffect } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native'
+
+import moment from 'moment';
+
+import { useDispatch, useSelector } from 'react-redux'
 
 import User from '../../Components/User'
 
-import { FontAwesome, MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { MaterialIcons, Ionicons, Entypo  } from '@expo/vector-icons';
+
+import { getShowTransaction } from '../../store/modules/transaction/actions'
 
 import styles from './styles'
 
-export default function Detail(){
+export default function Detail({ route, navigation }){
+  const dispatch = useDispatch()
+  const { showTrans } = useSelector((state) => state.transactions)
+
+  const { id } = route.params || {}
+
+  useEffect(() => {
+    dispatch(getShowTransaction(id))
+  },[id])
+  
   return (
     <View style={styles.container}>
       <User /> 
 
       <View style={styles.content}>
         <View style={styles.iconCard}>
-          <FontAwesome name="credit-card" size={25} color="black" />
+          <Entypo name="shopping-bag" size={25} color="black" />
         </View>
 
         <Text style={styles.detailTitle}>Detalhe da compra</Text>
 
         <View style={styles.detailBody}>          
-        <Text style={styles.contentTitle}>Internet</Text>
+        <Text style={styles.contentTitle}>{showTrans.category}</Text>
           <View style={styles.contentData}>
-            <Text>Fev 02-2022</Text>
+            <Text>{moment(showTrans.data).format('MMM DD-YYYY')}</Text>
               <View style={styles.contentCircle}></View>
-            <Text>Cartão</Text>
+            <Text>{showTrans.operation}</Text>
           </View>
           <View style={styles.contentData}>
-            <Text>Mercadinho de cavaleiro</Text>              
+            <Text>{showTrans.description}</Text>              
           </View>
-          <Text style={styles.contentValue}>R$ - 150,00</Text>       
+          <Text style={styles.contentValue}>
+            {showTrans.type === "despesa" ? "-": "+"}{" "}
+            {Intl.NumberFormat('pt-BR', { 
+                style: 'currency', 
+                currency: 'BRL',
+              }).format(showTrans.value)}</Text>       
         </View>
 
         <View style={styles.iconEditRemove}>
@@ -42,15 +63,8 @@ export default function Detail(){
               <MaterialIcons name="delete-forever" size={35} color="black" />
             </TouchableOpacity>           
           </View>
-        </View>
-
-        <View style={styles.goBack}>
-          <Ionicons name="arrow-back" size={24} color="black" />
-          <TouchableOpacity>
-            <Text style={styles.goBackTitle}>Voltar</Text>
-          </TouchableOpacity>
-                    
-        </View>        
+        </View>    
+         
       </View>
     </View>
   )

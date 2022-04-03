@@ -46,7 +46,7 @@ export default function Home({ navigation }) {
         <FlatList         
             data={transactions}
             renderItem={({item}) => (
-              <TransComponent invoceCreditCard={item}/>
+              <TransComponent invoceCreditCard={item} navigation={navigation}/>
             )}        
             scrollEnabled
             showsHorizontalScrollIndicator={false}          

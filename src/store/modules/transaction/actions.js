@@ -9,3 +9,11 @@ export function setTransactions(payload) {
 export function registerTransaction(transaction) {
   return { type: types.REGISTER_TRANSACTIONS, transaction }
 }
+
+export function getShowTransaction(id) {
+  return { type: types.GET_SHOW_TRANSACTIONS, id }
+}
+
+export function setShowTransaction(payload) {
+  return { type: types.SET_SHOW_TRANSACTIONS, payload }
+}

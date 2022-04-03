@@ -3,13 +3,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import Toast from 'react-native-toast-message';
 
 import types from './types'
-import { setTransactions, getTransactions } from './actions'
+import { setTransactions, getTransactions, setShowTransaction } from './actions'
 import { loading } from '../loading/actions'
 
 import api from '../../../services/api'
 import { navigate } from '../../../services/navigation'
 
-export function* GetTransaction(){
+export function* GetTransactions(){
   const data = yield AsyncStorage.getItem('@data')
   const { token } = JSON.parse(data)
 
@@ -32,18 +32,18 @@ export function* GetTransaction(){
   }
 }
 
-export function* GetCard({ id }){
+export function* GetShowTransaction({ id }){
   const data = yield AsyncStorage.getItem('@data')
   const { token } = JSON.parse(data)
 
   yield put(loading(true));
  
   try {
-    const { data } = yield call(api.get, `creditCard/${id}`, {
+    const { data } = yield call(api.get, `transaction/${id}`, {
       headers: {"Authorization" : `Bearer ${token}`}
-    })        
-    yield put(setCard(data)) 
-
+    })      
+    yield put(setShowTransaction(data))
+    
   } catch (error) {
     Toast.show({
       type: 'error',
@@ -159,6 +159,7 @@ export function* DeleteCard({ id }){
 }
 
 export default all([
-  takeLatest(types.GET_TRANSACTIONS, GetTransaction), 
+  takeLatest(types.GET_TRANSACTIONS, GetTransactions), 
   takeLatest(types.REGISTER_TRANSACTIONS, RegisterTransaction),
+  takeLatest(types.GET_SHOW_TRANSACTIONS, GetShowTransaction),
 ]);
