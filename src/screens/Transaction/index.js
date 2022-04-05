@@ -1,6 +1,9 @@
+import { useState, useEffect } from 'react'
 import { View, Text, FlatList } from 'react-native'
 
 import { useRoute } from '@react-navigation/native'
+
+import { useSelector } from 'react-redux'
 
 import User from '../../Components/User'
 import Balance from '../../Components/Balance'
@@ -8,11 +11,21 @@ import TransComponent from '../../Components/TransComponent'
 
 import styles from './styles'
 
-
-const DATA1 = [{id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}, {id: 6}, {id: 7}, {id: 8}]
-
-export default function Transaction() {
+export default function Transaction({ navigation }) {
   const { name } = useRoute();
+  const { trans: { transactions } } = useSelector((state) => state.transactions)
+
+  const [filterTrans, setFilterTrans] = useState("")
+
+  useEffect(() => {
+    FilterTrans()
+  },[])
+
+  function FilterTrans(){
+    const result = transactions.filter((item) => { return item.operation === "conta"})
+
+    setFilterTrans(result)
+  }
 
   return (
    <View style={styles.container}>
@@ -28,14 +41,14 @@ export default function Transaction() {
         </View>    
           <Text style={styles.transactionTitle}>Recentes Lançamentos</Text>
           <FlatList         
-            data={DATA1}
+            data={filterTrans}
             renderItem={({item}) => (
-              <TransComponent />
+              <TransComponent invoceCreditCard={item} navigation={navigation}/>
             )}        
             scrollEnabled
             showsHorizontalScrollIndicator={false}          
             keyExtractor={item => item.id}
-          />  
+          />       
       </View>     
    </View>
   );

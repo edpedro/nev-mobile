@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native'
 import { useSelector } from 'react-redux'
 
@@ -5,17 +6,25 @@ import { AntDesign } from '@expo/vector-icons';
 
 import User from '../../Components/User'
 import CardComponent from '../../Components/CardComponent'
-
-import { getCards } from '../../store/modules/creditCard/actions'
+import TransComponent from '../../Components/TransComponent';
 
 import styles from './styles'
 
-
-const DATA = [{id: 1}]
-const DATA1 = [{id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}, {id: 6}, {id: 7}, {id: 8}]
-
 export default function Card({ navigation }) {
   const { cards } = useSelector((state) => state.creditCards)
+  const { trans: { transactions } } = useSelector((state) => state.transactions)
+
+  const [filterCards, setFilterCards] = useState("")
+
+  useEffect(() => {
+    FilterCard()
+  },[])
+
+  function FilterCard(){
+    const result = transactions.filter((item) => { return item.operation === "cartao"})
+
+    setFilterCards(result)
+  }
 
   return (
    <View style={styles.container}>
@@ -44,15 +53,15 @@ export default function Card({ navigation }) {
         </View> 
     
           <Text style={styles.transactionTitle}>Recentes Lançamentos</Text>
-          {/* <FlatList         
-            data={DATA1}
+          <FlatList         
+            data={filterCards}
             renderItem={({item}) => (
-              <TransComponent />
+              <TransComponent invoceCreditCard={item} navigation={navigation}/>
             )}        
             scrollEnabled
             showsHorizontalScrollIndicator={false}          
             keyExtractor={item => item.id}
-          />   */}
+          />       
       </View>     
    </View>
   );
