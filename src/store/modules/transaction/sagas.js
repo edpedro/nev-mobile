@@ -106,24 +106,25 @@ export function* GetCardTrans({ id }){
   }
 }
 
-export function* UpdateCard({ card, id }){
+export function* UpdateTransaction({ transaction, id }){
   const data = yield AsyncStorage.getItem('@data')
   const { token } = JSON.parse(data)
-
+  
   try {    
-    yield call(api.put, `creditCard/${id}`, card, {
+    yield call(api.put, `transaction/${id}`, transaction, {
       headers: {"Authorization" : `Bearer ${token}`}
     })       
     
-    yield put(getCards())
+    yield put(getTransactions())
+    yield navigate('Inicio')
     
     Toast.show({
       type: 'success',
-      text1: 'Cartão de credito',
-      text2: 'Atualizado com sucesso'
+      text1: 'Transação',
+      text2: 'Lançamento atualizado com sucesso'
     });
     
-  } catch (error) {
+  } catch (error) {    
     Toast.show({
       type: 'error',
       text1: 'Tente novamente!',
@@ -162,4 +163,5 @@ export default all([
   takeLatest(types.GET_TRANSACTIONS, GetTransactions), 
   takeLatest(types.REGISTER_TRANSACTIONS, RegisterTransaction),
   takeLatest(types.GET_SHOW_TRANSACTIONS, GetShowTransaction),
+  takeLatest(types.UPDATE_TRANSACTION, UpdateTransaction),
 ]);

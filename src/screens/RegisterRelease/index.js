@@ -9,7 +9,7 @@ import Input from '../../Components/Input'
 import Select from '../../Components/Select';
 import InputDatePicker from '../../Components/InputDatePicker';
 
-import { registerTransaction } from '../../store/modules/transaction/actions'
+import { registerTransaction, updateTransaction } from '../../store/modules/transaction/actions'
 
 import styles from './styles'
 
@@ -21,9 +21,11 @@ const categorys = ["Alimentação", "Assinaturas e serviços", "Bares e restaura
 "Lazer e hobbies","Mercado","Pagamento de fatura","Pets","Roupas","Saúde",
 ]
 
-export default function RegisterRelease(){
+export default function RegisterRelease({ route }){
   const { cards } = useSelector((state) => state.creditCards)
   const dispatch = useDispatch()
+
+  const { showTrans } = route.params || {}
 
   const [description, setDescription] = useState("")
   const [value, setValue] = useState("")  
@@ -86,7 +88,7 @@ export default function RegisterRelease(){
     setType(value)
   }
   function handleAcountCard(value) {
-    setOperation(value)
+    setOperation(value) 
   }
 
   function handleSubmit(){  
@@ -101,14 +103,39 @@ export default function RegisterRelease(){
       type,
       creditCard
     }
-    console.log(dataForm)
-    dispatch(registerTransaction(dataForm))
+    if(!showTrans){
+      dispatch(registerTransaction(dataForm))
+    }else{
+      dispatch(updateTransaction(dataForm, showTrans.id))
+    }   
+   
   }
 
   useEffect(() => {
+    if(showTrans){
+     const newData = new Date(showTrans.data)        
+
+     setDescription(showTrans.description)
+     setValue(showTrans.value)  
+     setCategory(showTrans.category)
+     setOperation(showTrans.operation)    
+     setType(showTrans.type)     
+     setData(moment(newData).add(1, 'days').toDate())
+
+     if(showTrans.creditCard){
+      setCreditCard(showTrans.creditCard.id) 
+      setCard(showTrans.creditCard.bank)  
+     }
+
+    } 
+   
+    
+  }, [showTrans])
+
+  useEffect(() => {
     FilterOperation()
-    FilterCardName()
-  }, [operation, card])
+    FilterCardName() 
+  },[operation, card])
 
   function FilterOperation(){
     if(operation === "cartao"){
@@ -131,6 +158,7 @@ export default function RegisterRelease(){
     }
     setCardName(banks)
   }
+  console.log(showTrans)
   return (
     <KeyboardAvoidingView 
     behavior={Platform.OS === "ios" ? "padding" : "height"}   
@@ -204,7 +232,7 @@ export default function RegisterRelease(){
               return (
                 <TouchableOpacity 
                 key={key}
-                onPress={() => handleAcountCard(item.value)}
+                onPress={() => {handleAcountCard(item.value)}}
                 style={[styles.card, item.value === operation && styles.selectedOperation]}
                 >
                   {item.value === "cartao" 
@@ -230,7 +258,7 @@ export default function RegisterRelease(){
               value={card}
               options={cardsName} 
               error={errors.card}
-              onChangeSelect={(item) => {
+              onChangeSelect={(item) => {                
                 setCard(item) 
                 handleError(null, 'card')         
               }}         

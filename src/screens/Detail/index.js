@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import User from '../../Components/User'
 
-import { MaterialIcons, Ionicons, Entypo  } from '@expo/vector-icons';
+import { MaterialIcons, Entypo } from '@expo/vector-icons';
 
 import { getShowTransaction } from '../../store/modules/transaction/actions'
 
@@ -22,7 +22,7 @@ export default function Detail({ route, navigation }){
   useEffect(() => {
     dispatch(getShowTransaction(id))
   },[id])
-  
+    console.log(showTrans)
   return (
     <View style={styles.container}>
       <User /> 
@@ -42,19 +42,25 @@ export default function Detail({ route, navigation }){
             <Text>{showTrans.operation}</Text>
           </View>
           <View style={styles.contentData}>
-            <Text>{showTrans.description}</Text>              
+            <Text>{showTrans.description}</Text>                      
           </View>
+          <Text>{showTrans.creditCard && showTrans.creditCard.bank}</Text>
           <Text style={styles.contentValue}>
             {showTrans.type === "despesa" ? "-": "+"}{" "}
             {Intl.NumberFormat('pt-BR', { 
                 style: 'currency', 
                 currency: 'BRL',
-              }).format(showTrans.value)}</Text>       
+              }).format(showTrans.value)}
+          </Text>       
         </View>
 
         <View style={styles.iconEditRemove}>
           <View style={styles.iconEdit}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => {      
+              navigation.navigate('RegisterRelease', {
+                showTrans 
+              });
+           }}>
               <MaterialIcons name="mode-edit" size={35} color="black" />
             </TouchableOpacity>            
           </View>

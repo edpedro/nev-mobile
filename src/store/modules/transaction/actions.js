@@ -17,3 +17,7 @@ export function getShowTransaction(id) {
 export function setShowTransaction(payload) {
   return { type: types.SET_SHOW_TRANSACTIONS, payload }
 }
+
+export function updateTransaction(transaction, id) {
+  return { type: types.UPDATE_TRANSACTION, transaction, id }
+}
