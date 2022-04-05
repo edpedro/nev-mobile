@@ -158,7 +158,7 @@ export default function RegisterRelease({ route }){
     }
     setCardName(banks)
   }
-  console.log(showTrans)
+
   return (
     <KeyboardAvoidingView 
     behavior={Platform.OS === "ios" ? "padding" : "height"}   

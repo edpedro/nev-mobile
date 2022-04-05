@@ -5,7 +5,7 @@ import { deleteCard } from '../../store/modules/creditCard/actions'
 
 import styles from './styles'
 
-export default function ModalDelete({ modalVisible, setModalVisible, idCard, navigation }) {
+export default function ModalDeleteCard({ modalVisible, setModalVisible, idCard }) {
   const dispatch = useDispatch()
 
   function handleDeleteCard(){

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import User from '../../Components/User'
 import TransComponent from '../../Components/TransComponent'
-import ModalDelete from '../../Components/ModalDelete'
+import ModalDelete from '../../Components/ModalDeleteCard'
 
 import { getCard, getCardTrans } from '../../store/modules/creditCard/actions'
 

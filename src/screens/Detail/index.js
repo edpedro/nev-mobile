@@ -1,9 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native'
 
 import moment from 'moment';
 
 import { useDispatch, useSelector } from 'react-redux'
+
+import ModalDelete from '../../Components/ModalDeleteTrans'
 
 import User from '../../Components/User'
 
@@ -17,12 +19,14 @@ export default function Detail({ route, navigation }){
   const dispatch = useDispatch()
   const { showTrans } = useSelector((state) => state.transactions)
 
+  const [modalVisible, setModalVisible] = useState(false);
+
   const { id } = route.params || {}
 
   useEffect(() => {
     dispatch(getShowTransaction(id))
   },[id])
-    console.log(showTrans)
+
   return (
     <View style={styles.container}>
       <User /> 
@@ -65,12 +69,20 @@ export default function Detail({ route, navigation }){
             </TouchableOpacity>            
           </View>
           <View style={styles.iconRemove}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => {
+              setModalVisible(true)              
+              }} >
               <MaterialIcons name="delete-forever" size={35} color="black" />
             </TouchableOpacity>           
           </View>
         </View>    
-         
+        {modalVisible && 
+          <ModalDelete 
+            id={id} 
+            modalVisible={modalVisible} 
+            setModalVisible={setModalVisible}            
+          /> 
+        }      
       </View>
     </View>
   )

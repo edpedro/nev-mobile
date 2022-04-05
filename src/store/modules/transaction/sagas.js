@@ -133,21 +133,22 @@ export function* UpdateTransaction({ transaction, id }){
   }
 }
 
-export function* DeleteCard({ id }){
+export function* DeleteTransaction({ id }){
   const data = yield AsyncStorage.getItem('@data')
   const { token } = JSON.parse(data)
-
+ 
   try {    
-    yield call(api.delete, `creditCard/${id}`,{
+    yield call(api.delete, `transaction/${id}`,{
       headers: {"Authorization" : `Bearer ${token}`}
     })       
     
-    yield put(getCards()) 
-    yield navigate('Card');
+    yield put(getTransactions())
+    yield navigate('Inicio')
+
     Toast.show({
       type: 'success',
-      text1: 'Cartão de credito',
-      text2: 'Deletado com sucesso'
+      text1: 'Transação',
+      text2: 'Lançamento deletado com sucesso'
     });
     
   } catch (error) {
@@ -164,4 +165,5 @@ export default all([
   takeLatest(types.REGISTER_TRANSACTIONS, RegisterTransaction),
   takeLatest(types.GET_SHOW_TRANSACTIONS, GetShowTransaction),
   takeLatest(types.UPDATE_TRANSACTION, UpdateTransaction),
+  takeLatest(types.DELETE_TRANSACTION, DeleteTransaction),
 ]);
