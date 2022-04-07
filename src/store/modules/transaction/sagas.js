@@ -11,10 +11,6 @@ import { loading } from '../loading/actions'
 import api from '../../../services/api'
 import { navigate } from '../../../services/navigation'
 
-const mes = {
-  month: "04"
-}
-
 export function* GetTransactions(){
   const data = yield AsyncStorage.getItem('@data')
   const { token } = JSON.parse(data)
@@ -22,7 +18,7 @@ export function* GetTransactions(){
   yield put(loading(true));
  
   try {
-    const { data } = yield call(api.post, 'transaction', mes,{
+    const { data } = yield call(api.get, 'transaction', {
       headers: {"Authorization" : `Bearer ${token}`}
     })        
     yield put(setTransactions(data))
@@ -64,7 +60,7 @@ export function* GetShowTransaction({ id }){
 export function* RegisterTransaction({ transaction }){
   const data = yield AsyncStorage.getItem('@data')
   const { token } = JSON.parse(data) 
-
+  console.log(transaction)
   try {    
     yield call(api.post, 'transaction', transaction, {
       headers: {"Authorization" : `Bearer ${token}`}
