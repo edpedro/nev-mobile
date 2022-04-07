@@ -25,6 +25,15 @@ const styles = StyleSheet.create({
     marginTop: -30,
     marginBottom: 20
   },
+  filter:{
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+
+    marginTop: -40,
+    marginBottom: 70
+  },
   detailTitle: {
     fontWeight: "bold",
     fontSize: 28

@@ -27,7 +27,7 @@ export default function Input({
         style={[styles.input, { borderColor: error ? "red" : "#fff"}]} 
         name={name} 
         value={name} 
-        onChangeText={text => setData(text.trim())}
+        onChangeText={text => setData(text)}
         {...props}
       />
       {

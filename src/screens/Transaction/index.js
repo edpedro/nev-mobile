@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux'
 import User from '../../Components/User'
 import Balance from '../../Components/Balance'
 import TransComponent from '../../Components/TransComponent'
+import SelectFilter from '../../Components/SelectFilter'
 
 import styles from './styles'
 
@@ -38,7 +39,14 @@ export default function Transaction({ navigation }) {
      <View style={styles.content}>
         <View style={styles.balance}>
            <Balance route={name}/>
-        </View>    
+        </View> 
+        <View style={styles.filter}>
+          <SelectFilter  
+              title="Data" 
+              text={"Filtro por Mês"} 
+          />
+          
+        </View>   
           <Text style={styles.transactionTitle}>Recentes Lançamentos</Text>
           <FlatList         
             data={filterTrans}

@@ -3,11 +3,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import Toast from 'react-native-toast-message';
 
 import types from './types'
+
+import { getCards } from '../creditCard/actions'
 import { setTransactions, getTransactions, setShowTransaction } from './actions'
 import { loading } from '../loading/actions'
 
 import api from '../../../services/api'
 import { navigate } from '../../../services/navigation'
+
+const mes = {
+  month: "04"
+}
 
 export function* GetTransactions(){
   const data = yield AsyncStorage.getItem('@data')
@@ -16,12 +22,13 @@ export function* GetTransactions(){
   yield put(loading(true));
  
   try {
-    const { data } = yield call(api.get, 'transaction',{
+    const { data } = yield call(api.post, 'transaction', mes,{
       headers: {"Authorization" : `Bearer ${token}`}
     })        
     yield put(setTransactions(data))
   
   } catch (error) {
+    
     Toast.show({
       type: 'error',
       text1: 'Tente novamente!',
@@ -73,36 +80,12 @@ export function* RegisterTransaction({ transaction }){
     });
   
   } catch (error) {
-    console.log(error)
+
     Toast.show({
       type: 'error',
       text1: 'Tente novamente!',
      
     });
-  }
-}
-
-export function* GetCardTrans({ id }){
-  const data = yield AsyncStorage.getItem('@data')
-  const { token } = JSON.parse(data)
-
-  yield put(loading(true));
-  
-  try {
-    const { data } = yield call(api.post, `creditCard/invoce/${id}`, mes, {
-      headers: {"Authorization" : `Bearer ${token}`}
-    })        
-    
-    yield put(setCardTrans(data))
-
-  } catch (error) {
-    Toast.show({
-      type: 'error',
-      text1: 'Tente novamente!',
-     
-    });
-  }finally {
-    yield put(loading(false));
   }
 }
 
@@ -140,8 +123,9 @@ export function* DeleteTransaction({ id }){
   try {    
     yield call(api.delete, `transaction/${id}`,{
       headers: {"Authorization" : `Bearer ${token}`}
-    })       
-    
+    })     
+   
+    yield put(getCards()) 
     yield put(getTransactions())
     yield navigate('Inicio')
 

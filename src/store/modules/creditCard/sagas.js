@@ -10,8 +10,9 @@ import api from '../../../services/api'
 import { navigate } from '../../../services/navigation'
 
 const mes = {
-  month: "03"
+  month: ""
 }
+
 export function* GetCards(){
   const data = yield AsyncStorage.getItem('@data')
   const { token } = JSON.parse(data)
@@ -23,8 +24,8 @@ export function* GetCards(){
       headers: {"Authorization" : `Bearer ${token}`}
     })        
     yield put(setCards(data)) 
-
-  } catch (error) {
+  
+  } catch (error) {    
     Toast.show({
       type: 'error',
       text1: 'Tente novamente!',
@@ -35,19 +36,20 @@ export function* GetCards(){
   }
 }
 
-export function* GetCard({ id }){
+export function* GetCard({ id, month }){
   const data = yield AsyncStorage.getItem('@data')
   const { token } = JSON.parse(data)
 
   yield put(loading(true));
  
   try {
-    const { data } = yield call(api.get, `creditCard/${id}`, {
+    const { data } = yield call(api.post, `creditCard/${id}`, month, {
       headers: {"Authorization" : `Bearer ${token}`}
     })        
     yield put(setCard(data)) 
 
-  } catch (error) {
+  } catch (error) {  
+
     Toast.show({
       type: 'error',
       text1: 'Tente novamente!',
@@ -82,14 +84,14 @@ export function* RegisterCards({card}){
   }
 }
 
-export function* GetCardTrans({ id }){
+export function* GetCardTrans({ id, month }){
   const data = yield AsyncStorage.getItem('@data')
   const { token } = JSON.parse(data)
 
   yield put(loading(true));
   
   try {
-    const { data } = yield call(api.post, `creditCard/invoce/${id}`, mes, {
+    const { data } = yield call(api.post, `creditCard/invoce/${id}`, month, {
       headers: {"Authorization" : `Bearer ${token}`}
     })        
     
@@ -139,10 +141,11 @@ export function* DeleteCard({ id }){
   try {    
     yield call(api.delete, `creditCard/${id}`,{
       headers: {"Authorization" : `Bearer ${token}`}
-    })       
-    
-    yield put(getCards()) 
+    })     
+   
+    yield put(getCards())       
     yield navigate('Card');
+
     Toast.show({
       type: 'success',
       text1: 'Cartão de credito',

@@ -8,31 +8,30 @@ import ModalDelete from '../../Components/ModalDeleteCard'
 
 import { getCard, getCardTrans } from '../../store/modules/creditCard/actions'
 
+import SelectFilter from '../../Components/SelectFilter'
+
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
 import styles from './styles'
 
+const months = ["01","02","03","04","05","06","07","08","09","10","11","12"]
+
 export default function DetailCard({ route, navigation }){ 
-  const { cardTrans, cards } = useSelector((state) => state.creditCards)
+  const { cardTrans, card } = useSelector((state) => state.creditCards)
   const dispatch = useDispatch()
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [cardFilter, setCardFilter] = useState({})
+  const [cardMonth, setCardMonth] = useState("")
 
   const { id } = route.params || {} 
 
   useEffect(() => {
-    dispatch(getCard(id))
-    dispatch(getCardTrans(id))
+    dispatch(getCard(id, cardMonth))
+    dispatch(getCardTrans(id, cardMonth))    
+  },[id, cardMonth]) 
 
-     const filterCard  = cards.filter((item) => {
-        return item.id === id
-      })
-  
-      setCardFilter(filterCard[0])
-  },[id]) 
 
-    return (
+  return (
     <View style={styles.container}>
       <User /> 
 
@@ -41,19 +40,34 @@ export default function DetailCard({ route, navigation }){
 
         <View style={styles.iconCard}>
           <FontAwesome name="credit-card" size={25} color="black" />
-        </View>    
- 
-        <Text style={styles.detailTitle}>{cardFilter.bank}</Text>
+        </View> 
+         
+        <View style={styles.filter}>
+          <SelectFilter  
+              title="Data" 
+              text={"Filtro por Mês"} 
+              options={months}
+              onChangeSelect={(item) => {                
+                setCardMonth((prevState) => ({
+                  ...prevState,
+                  month: item                  
+                }));             
+              }}    
+          />
+          
+        </View>
+
+        <Text style={styles.detailTitle}>{card.bank}</Text>
 
         <View style={styles.detailBody}>          
-          <Text style={styles.contentTitle}>{cardFilter.win} Vencimento | {cardFilter.close} Fechamento</Text>
+          <Text style={styles.contentTitle}>{card.win} Vencimento | {card.close} Fechamento</Text>
           <View style={styles.contenInvoice}>
             <Text style={styles.invoiceTitle}>Fatura</Text>
             <Text style={styles.invoiceValue}>  
             {Intl.NumberFormat('pt-BR', { 
             style: 'currency', 
             currency: 'BRL',
-          }).format(cardFilter.cardBalance)}
+          }).format(card.cardBalance)}
           </Text>
           </View>
           <View style={styles.contentLimit}>
@@ -62,7 +76,7 @@ export default function DetailCard({ route, navigation }){
               {Intl.NumberFormat('pt-BR', { 
               style: 'currency', 
               currency: 'BRL',
-            }).format(cardFilter.limit - cardFilter.cardBalance)}
+            }).format(card.limit - card.cardBalance)}
            </Text>         
           </View>          
         </View>
@@ -71,7 +85,7 @@ export default function DetailCard({ route, navigation }){
           <View style={styles.iconEdit}>
             <TouchableOpacity onPress={() => {      
               navigation.navigate('RegisterCard', {
-                cardFilter 
+                card 
               });
            }}>
               <MaterialIcons name="mode-edit" size={35} color="black" />

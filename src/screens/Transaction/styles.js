@@ -26,6 +26,9 @@ const styles = StyleSheet.create({
     marginTop: 60,    
     marginBottom: 40,
   },
+  filter: {
+    marginTop: -50
+  },
   transactionTitle: {
     fontSize: 28,
     fontWeight: "bold",

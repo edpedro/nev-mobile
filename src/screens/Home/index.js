@@ -22,7 +22,7 @@ export default function Home({ navigation }) {
     dispatch(getCards())
     dispatch(getTransactions())
   },[])
-  
+    
    return (
     <View style={styles.container}>  
       <User />
