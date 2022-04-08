@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   },
   balance: {
     marginTop: 60,    
-    marginBottom: 40,
+    marginBottom: 60,
   },
   filter: {
     marginTop: -50
@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold",
     marginLeft: 18,
-    marginBottom: 5,
+    marginBottom: 10,
+    marginTop: 15
   },
 });
 

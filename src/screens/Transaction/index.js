@@ -3,7 +3,9 @@ import { View, Text, FlatList } from 'react-native'
 
 import { useRoute } from '@react-navigation/native'
 
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { getTransactionsRelease } from '../../store/modules/transaction/actions'
 
 import User from '../../Components/User'
 import Balance from '../../Components/Balance'
@@ -12,21 +14,19 @@ import SelectFilter from '../../Components/SelectFilter'
 
 import styles from './styles'
 
+const months = ["01","02","03","04","05","06","07","08","09","10","11","12"]
+
 export default function Transaction({ navigation }) {
   const { name } = useRoute();
-  const { trans: { transactions } } = useSelector((state) => state.transactions)
+  const { transRelease: { result, balance } } = useSelector((state) => state.transactions)
 
-  const [filterTrans, setFilterTrans] = useState("")
+  const dispatch = useDispatch()
+
+  const [cardMonth, setCardMonth] = useState("")
 
   useEffect(() => {
-    FilterTrans()
-  },[])
-
-  function FilterTrans(){
-    const result = transactions.filter((item) => { return item.operation === "conta"})
-
-    setFilterTrans(result)
-  }
+    dispatch(getTransactionsRelease(cardMonth))  
+  },[cardMonth])
 
   return (
    <View style={styles.container}>
@@ -38,18 +38,25 @@ export default function Transaction({ navigation }) {
      </View>
      <View style={styles.content}>
         <View style={styles.balance}>
-           <Balance route={name}/>
+           <Balance route={name} data={balance}/>
         </View> 
         <View style={styles.filter}>
           <SelectFilter  
               title="Data" 
               text={"Filtro por Mês"} 
+              options={months}
+              onChangeSelect={(item) => {                
+                setCardMonth((prevState) => ({
+                  ...prevState,
+                  month: item                  
+                }));             
+              }}   
           />
           
         </View>   
-          <Text style={styles.transactionTitle}>Recentes Lançamentos</Text>
+          <Text style={styles.transactionTitle}>Lançamentos</Text>
           <FlatList         
-            data={filterTrans}
+            data={result}
             renderItem={({item}) => (
               <TransComponent invoceCreditCard={item} navigation={navigation}/>
             )}        

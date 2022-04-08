@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { View, Text, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux'
 
+import moment from 'moment'
+
 import styles from './styles'
 
 import User from '../../Components/User'
@@ -14,19 +16,20 @@ import { getTransactions } from '../../store/modules/transaction/actions'
 
 export default function Home({ navigation }) {
   const { cards } = useSelector((state) => state.creditCards)
-  const { trans: { transactions } } = useSelector((state) => state.transactions)
+  const { trans: { transactions, balance } } = useSelector((state) => state.transactions)
 
   const dispatch = useDispatch()
-  
+
+ 
   useEffect(() => {
     dispatch(getCards())
     dispatch(getTransactions())
   },[])
-    
+  
    return (
     <View style={styles.container}>  
       <User />
-      <Balance />
+      <Balance data={balance}/>
       <View style={styles.content}>
         <Text style={styles.cardTitle}>Cartão de credito</Text>
         <View style={styles.card}>
