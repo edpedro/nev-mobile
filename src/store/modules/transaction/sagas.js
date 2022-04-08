@@ -7,7 +7,7 @@ import moment from 'moment';
 import types from './types'
 
 import { getCards } from '../creditCard/actions'
-import { setTransactions, getTransactions, setShowTransaction, setTransactionsRelease } from './actions'
+import { setTransactions, getTransactions, setShowTransaction, setTransactionsRelease, getTransactionsRelease } from './actions'
 import { loading } from '../loading/actions'
 
 import api from '../../../services/api'
@@ -97,6 +97,7 @@ export function* RegisterTransaction({ transaction }){
     })    
 
     yield put(getTransactions())
+    yield put(getCards())
     yield navigate('Inicio')
 
     Toast.show({
@@ -125,6 +126,7 @@ export function* UpdateTransaction({ transaction, id }){
     })       
     
     yield put(getTransactions())
+    yield put(getTransactionsRelease())
     yield navigate('Inicio')
     
     Toast.show({
@@ -152,6 +154,7 @@ export function* DeleteTransaction({ id }){
     })     
    
     yield put(getCards()) 
+    yield put(getTransactionsRelease())
     yield put(getTransactions())
     yield navigate('Inicio')
 
