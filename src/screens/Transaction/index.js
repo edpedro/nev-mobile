@@ -20,13 +20,16 @@ export default function Transaction({ navigation }) {
   const { name } = useRoute();
   const { transRelease: { result, balance } } = useSelector((state) => state.transactions)
 
+  const [refreshing, setRefreshing] = useState(false);
+
   const dispatch = useDispatch()
 
   const [cardMonth, setCardMonth] = useState("")
 
   useEffect(() => {
-    dispatch(getTransactionsRelease(cardMonth))  
-  },[cardMonth])
+    dispatch(getTransactionsRelease(cardMonth))
+    setRefreshing(false)  
+  },[cardMonth, refreshing])
 
   return (
    <View style={styles.container}>
@@ -63,6 +66,10 @@ export default function Transaction({ navigation }) {
             scrollEnabled
             showsHorizontalScrollIndicator={false}          
             keyExtractor={item => item.id}
+            refreshing={refreshing}
+            onRefresh={() => {
+              setRefreshing(true);          
+            }}
           />       
       </View>     
    </View>

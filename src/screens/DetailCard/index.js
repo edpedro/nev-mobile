@@ -22,13 +22,15 @@ export default function DetailCard({ route, navigation }){
 
   const [modalVisible, setModalVisible] = useState(false);
   const [cardMonth, setCardMonth] = useState("")
+  const [refreshing, setRefreshing] = useState(false);
 
   const { id } = route.params || {} 
 
   useEffect(() => {
     dispatch(getCard(id, cardMonth))
-    dispatch(getCardTrans(id, cardMonth))    
-  },[id, cardMonth]) 
+    dispatch(getCardTrans(id, cardMonth))   
+    setRefreshing(false) 
+  },[id, cardMonth, refreshing]) 
 
 
   return (
@@ -110,6 +112,10 @@ export default function DetailCard({ route, navigation }){
             scrollEnabled
             showsHorizontalScrollIndicator={false}          
             keyExtractor={item => item.id}
+            refreshing={refreshing}
+            onRefresh={() => {
+              setRefreshing(true);          
+            }}
           /> 
           :
           <View style={styles.notRelease}>

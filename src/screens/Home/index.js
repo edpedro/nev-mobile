@@ -1,8 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { View, Text, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux'
-
-import moment from 'moment'
 
 import styles from './styles'
 
@@ -18,13 +16,16 @@ export default function Home({ navigation }) {
   const { cards } = useSelector((state) => state.creditCards)
   const { trans: { transactions, balance } } = useSelector((state) => state.transactions)
 
+  const [refreshing, setRefreshing] = useState(false);
+
   const dispatch = useDispatch()
 
  
   useEffect(() => {
     dispatch(getCards())
     dispatch(getTransactions())
-  },[])
+    setRefreshing(false)
+  },[refreshing])
   
    return (
     <View style={styles.container}>  
@@ -54,6 +55,10 @@ export default function Home({ navigation }) {
             scrollEnabled
             showsHorizontalScrollIndicator={false}          
             keyExtractor={item => item.id}
+            refreshing={refreshing}
+            onRefresh={() => {
+              setRefreshing(true);          
+            }}
           />       
       </View>
     </View>

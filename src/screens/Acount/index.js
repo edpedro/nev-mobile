@@ -27,13 +27,7 @@ export default function Acount(){
             <Text>Sair</Text>
           </TouchableOpacity>            
         </View>   
-      </View> 
-        <View style={styles.goBack}>
-          <Ionicons name="arrow-back" size={24} color="black" />
-          <TouchableOpacity>
-            <Text style={styles.goBackTitle}>Voltar</Text>
-          </TouchableOpacity>                    
-        </View>        
+      </View>             
       </View>
     </View>
   )

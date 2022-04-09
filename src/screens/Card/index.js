@@ -14,10 +14,10 @@ export default function Card({ navigation }) {
   const { cards } = useSelector((state) => state.creditCards)
   const { trans: { transactions } } = useSelector((state) => state.transactions)
 
-  const [filterCards, setFilterCards] = useState("")
+  const [filterCards, setFilterCards] = useState("")  
 
   useEffect(() => {
-    FilterCard()
+    FilterCard()   
   },[])
 
   function FilterCard(){
