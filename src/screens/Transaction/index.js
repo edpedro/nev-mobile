@@ -58,19 +58,27 @@ export default function Transaction({ navigation }) {
           
         </View>   
           <Text style={styles.transactionTitle}>Lançamentos</Text>
-          <FlatList         
-            data={result}
-            renderItem={({item}) => (
-              <TransComponent invoceCreditCard={item} navigation={navigation}/>
-            )}        
-            scrollEnabled
-            showsHorizontalScrollIndicator={false}          
-            keyExtractor={item => item.id}
-            refreshing={refreshing}
-            onRefresh={() => {
-              setRefreshing(true);          
-            }}
-          />       
+          {result && result.length > 0
+            ?
+              <FlatList         
+              data={result}
+              renderItem={({item}) => (
+                <TransComponent invoceCreditCard={item} navigation={navigation}/>
+              )}        
+              scrollEnabled
+              showsHorizontalScrollIndicator={false}          
+              keyExtractor={item => item.id}
+              refreshing={refreshing}
+              onRefresh={() => {
+                setRefreshing(true);          
+              }}
+            />
+            :
+            <View style={styles.notRelease}>
+              <Text style={styles.notReleaseTitle}>Sem lançamentos</Text>     
+            </View> 
+          }
+          
       </View>     
    </View>
   );

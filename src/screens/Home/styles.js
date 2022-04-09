@@ -26,6 +26,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginLeft: 18,
     marginTop: 30,
+  },
+  notRelease: {
+    marginTop: 60,
+    alignItems: 'center'
+  },
+  notReleaseTitle: {
+    fontSize: 16,
+    fontWeight: "bold"
   }
 });
 

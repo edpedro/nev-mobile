@@ -6,7 +6,8 @@ import { AntDesign } from '@expo/vector-icons';
 
 import User from '../../Components/User'
 import CardComponent from '../../Components/CardComponent'
-import TransComponent from '../../Components/TransComponent';
+import TransComponent from '../../Components/TransComponent'
+import ButtonAddCard from '../../Components/ButtonAddCard';
 
 import styles from './styles'
 
@@ -39,29 +40,43 @@ export default function Card({ navigation }) {
      </View>
      <View style={styles.content}>
         <View style={styles.card}>
-       
+        {cards && cards.length > 0
+            ?
             <FlatList         
             data={cards}
-            renderItem={({item}) => (     
+            renderItem={({item}) => (         
               <CardComponent creditCards={item} navigation={navigation}/>
             )}
             horizontal={true}
             scrollEnabled
             showsHorizontalScrollIndicator={false}          
             keyExtractor={item => item.id}
-          />                    
+          />        
+            :
+              <ButtonAddCard />
+          }          
         </View> 
     
           <Text style={styles.transactionTitle}>Recentes Lançamentos</Text>
-          <FlatList         
-            data={filterCards}
-            renderItem={({item}) => (
-              <TransComponent invoceCreditCard={item} navigation={navigation}/>
-            )}        
-            scrollEnabled
-            showsHorizontalScrollIndicator={false}          
-            keyExtractor={item => item.id}
-          />       
+          {
+            filterCards && filterCards.length > 0
+
+            ?
+              <FlatList         
+              data={filterCards}
+              renderItem={({item}) => (
+                <TransComponent invoceCreditCard={item} navigation={navigation}/>
+              )}        
+              scrollEnabled
+              showsHorizontalScrollIndicator={false}          
+              keyExtractor={item => item.id}
+            />
+            :
+            <View style={styles.notRelease}>
+              <Text style={styles.notReleaseTitle}>Sem lançamentos</Text>     
+            </View> 
+          }
+            
       </View>     
    </View>
   );

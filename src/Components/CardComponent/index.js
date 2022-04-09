@@ -2,42 +2,43 @@ import { Text, View, TouchableOpacity } from "react-native";
 
 import styles from './styles'
 
+import ButtonAddCard from '../ButtonAddCard'
 
 export default function CardComponent({ creditCards, navigation }){ 
   const { id, bank, close, win, limit, cardBalance } = creditCards  
-
-  return (
-    <View style={styles.container}>
-      <View style={styles.contentHeader}>
-        <Text style={styles.headerTitle}>{bank}</Text>
-        <Text style={styles.headerData}>{win}V | {close}F</Text>
-      </View>
-      <View style={styles.contentBody}>
-        <View style={styles.invoice}>
-          <Text style={styles.invoiceTitle}>Fatura</Text>
-          
-          <Text style={styles.invoiceValue}>  
-          {Intl.NumberFormat('pt-BR', { 
-            style: 'currency', 
-            currency: 'BRL',
-          }).format(cardBalance)}</Text>
+  
+  return (   
+      <View style={styles.container}>
+        <View style={styles.contentHeader}>
+          <Text style={styles.headerTitle}>{bank}</Text>
+          <Text style={styles.headerData}>{win}V | {close}F</Text>
         </View>
-        <View style={styles.limit}>
-        <Text style={styles.limitTitle}>Limite disponivel</Text>        
-         <Text style={styles.limitValue}>
+        <View style={styles.contentBody}>
+          <View style={styles.invoice}>
+            <Text style={styles.invoiceTitle}>Fatura</Text>
+            
+            <Text style={styles.invoiceValue}>  
             {Intl.NumberFormat('pt-BR', { 
-            style: 'currency', 
-            currency: 'BRL',
-          }).format(limit - cardBalance)}</Text>     
+              style: 'currency', 
+              currency: 'BRL',
+            }).format(cardBalance)}</Text>
+          </View>
+          <View style={styles.limit}>
+          <Text style={styles.limitTitle}>Limite disponivel</Text>        
+          <Text style={styles.limitValue}>
+              {Intl.NumberFormat('pt-BR', { 
+              style: 'currency', 
+              currency: 'BRL',
+            }).format(limit - cardBalance)}</Text>     
+          </View>
         </View>
-      </View>
-      <TouchableOpacity style={styles.viewInvoice} onPress={() => {
-          navigation.navigate('DetailCard', {
-            id
-          })          
-        }}>
-          <Text style={styles.viewInvoiceText}>ver fatura</Text>
-      </TouchableOpacity>
-    </View>
+        <TouchableOpacity style={styles.viewInvoice} onPress={() => {
+            navigation.navigate('DetailCard', {
+              id
+            })          
+          }}>
+            <Text style={styles.viewInvoiceText}>ver fatura</Text>
+        </TouchableOpacity>
+      </View>   
   )
 }
