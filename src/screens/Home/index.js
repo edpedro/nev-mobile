@@ -75,20 +75,7 @@ export default function Home({ navigation }) {
           <View style={styles.notRelease}>
             <Text style={styles.notReleaseTitle}>Sem lançamentos</Text>     
           </View> 
-        }
-        <FlatList         
-            data={transactions}
-            renderItem={({item}) => (
-              <TransComponent invoceCreditCard={item} navigation={navigation}/>
-            )}        
-            scrollEnabled
-            showsHorizontalScrollIndicator={false}          
-            keyExtractor={item => item.id}
-            refreshing={refreshing}
-            onRefresh={() => {
-              setRefreshing(true);          
-            }}
-          />       
+        }       
       </View>
     </View>
   );
