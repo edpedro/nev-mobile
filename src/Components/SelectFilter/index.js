@@ -58,8 +58,8 @@ export default function SelectFilter({ title, text, onChangeSelect, options, val
               <Entypo name="chevron-left" size={28} color="black"  />  
             </TouchableOpacity> 
             <Text style={styles.selectText}>{txt}</Text>  
-            <TouchableOpacity onPress={() => setModalVisible(false)}>
-              <Text style={styles.modalText}>Cancelar</Text>  
+            <TouchableOpacity onPress={() => {setModalVisible(false), onChangeSelect(""), setTxt("Filtro por Mês"), setSelectd()}}>
+              <Text style={styles.modalText}>Limpar Filtro</Text>  
             </TouchableOpacity>           
           </View>
 

@@ -127,6 +127,7 @@ export function* UpdateTransaction({ transaction, id }){
     
     yield put(getTransactions())
     yield put(getTransactionsRelease())
+    yield put(getCards())
     yield navigate('Inicio')
     
     Toast.show({
