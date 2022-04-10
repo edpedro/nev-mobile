@@ -14,26 +14,21 @@ import { getTransactions } from '../../store/modules/transaction/actions'
 
 import styles from './styles'
 
-export default function Card({ navigation }) {
+export default function Card({ navigation, route }) {
   const { cards } = useSelector((state) => state.creditCards)
-  const { trans: { transactions } } = useSelector((state) => state.transactions)
+  const { transCard: { result } } = useSelector((state) => state.transactions)
 
   const dispatch = useDispatch()
+
+  const name = route.name || {};
 
   const [filterCards, setFilterCards] = useState("")  
 
   useEffect(() => {
     dispatch(getCards())
-    dispatch(getTransactions())
-    FilterCard()   
-  },[])
-
-  function FilterCard(){
-    const result = transactions.filter((item) => { return item.operation === "cartao"})
-
-    setFilterCards(result)
-  }
-
+    dispatch(getTransactions())     
+  },[]) 
+ 
   return (
    <View style={styles.container}>
      <View style={styles.user}>
@@ -66,11 +61,11 @@ export default function Card({ navigation }) {
     
           <Text style={styles.transactionTitle}>Recentes Lançamentos</Text>
           {
-            filterCards && filterCards.length > 0
+            result && result.length > 0
 
             ?
               <FlatList         
-              data={filterCards}
+              data={result}
               renderItem={({item}) => (
                 <TransComponent invoceCreditCard={item} navigation={navigation}/>
               )}        

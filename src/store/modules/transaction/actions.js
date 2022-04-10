@@ -12,6 +12,9 @@ export function setTransactions(payload) {
 export function setTransactionsRelease(payload) {
   return { type: types.SET_TRANSACTIONS_RELEASE, payload }
 }
+export function setTransactionsCard(payload) {
+  return { type: types.SET_TRANSACTIONS_CARD, payload }
+}
 export function registerTransaction(transaction) {
   return { type: types.REGISTER_TRANSACTIONS, transaction }
 }

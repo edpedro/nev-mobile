@@ -18,7 +18,7 @@ const acountCard = [{value: "cartao"}, { value: "conta"}]
 
 const categorys = ["Alimentação", "Assinaturas e serviços", "Bares e restaurantes", "Casa", "Compras",
 "Cuidados pessoais","Dívidas e empréstimos","Família e filhos","Impostos e Taxas","Investimentos",
-"Lazer e hobbies","Mercado","Pagamento de fatura","Pets","Roupas","Saúde",
+"Lazer e hobbies","Mercado","Pagamento de fatura","Pets","Roupas","Saúde", "Salario", "Outros"
 ]
 
 export default function RegisterRelease({ route }){
@@ -277,7 +277,7 @@ export default function RegisterRelease({ route }){
           />     
 
           <TouchableOpacity style={styles.button} onPress={() => validate()}>
-            <Text style={styles.textButton}>Adicionar</Text>
+            <Text style={styles.textButton}>{showTrans ? "Atualizar" : "Adicionar"}</Text>
           </TouchableOpacity>
           
         </View>    

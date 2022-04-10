@@ -78,7 +78,7 @@ export function* RegisterCards({card}){
   } catch (error) {
     Toast.show({
       type: 'error',
-      text1: 'Tente novamente!',
+      text1: 'Cartão Já exister!',
      
     });
   }

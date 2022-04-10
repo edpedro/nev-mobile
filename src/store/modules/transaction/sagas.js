@@ -7,7 +7,14 @@ import moment from 'moment';
 import types from './types'
 
 import { getCards } from '../creditCard/actions'
-import { setTransactions, getTransactions, setShowTransaction, setTransactionsRelease, getTransactionsRelease } from './actions'
+import { 
+  setTransactions, 
+  getTransactions, 
+  setShowTransaction, 
+  setTransactionsRelease, 
+  getTransactionsRelease,
+  setTransactionsCard, 
+} from './actions'
 import { loading } from '../loading/actions'
 
 import api from '../../../services/api'
@@ -29,7 +36,8 @@ export function* GetTransactions(){
       headers: {"Authorization" : `Bearer ${token}`}
     })        
     yield put(setTransactions(data))
-  
+    yield put(setTransactionsCard(data))
+
   } catch (error) {
     
     Toast.show({
@@ -53,7 +61,7 @@ export function* GetTransactionsRelease({ month }){
       headers: {"Authorization" : `Bearer ${token}`}
     })        
     yield put(setTransactionsRelease(data))
-  
+    
   } catch (error) {
     Toast.show({
       type: 'error',

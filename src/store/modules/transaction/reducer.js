@@ -4,7 +4,8 @@ import produce from 'immer'
 const INITIAL_STATE = {
   trans: {}, 
   showTrans: {},
-  transRelease: {}
+  transRelease: {},
+  transCard: {},
 }
 
 function transactions(state = INITIAL_STATE, action){
@@ -26,6 +27,15 @@ function transactions(state = INITIAL_STATE, action){
         const result = transactions.filter((item) => { return item.operation === "conta"})
 
         draft.transRelease = {result, balance }
+      });
+    }
+    case types.SET_TRANSACTIONS_CARD : {
+      return produce(state, (draft) => {
+         const { transactions, balance } = action.payload
+      
+        const result = transactions.filter((item) => { return item.operation === "cartao"})
+
+        draft.transCard = { result }
       });
     }
     default:
