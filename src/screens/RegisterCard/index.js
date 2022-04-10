@@ -15,7 +15,7 @@ const days = ["01","02","03","04","05","06","07","08","09","10","11","12"]
 export default function RegisterCard({ route, navigation }){
   const dispatch = useDispatch()
 
-  const { cardFilter } = route.params || {};
+  const { card } = route.params || {};
   
   const [name, setName] = useState("")
   const [limit, setLimit] = useState("")
@@ -27,15 +27,15 @@ export default function RegisterCard({ route, navigation }){
 
   useEffect(() => {
 
-    if(cardFilter){
-      setName(cardFilter.name)
-      setLimit(cardFilter.limit)
-      setClose(cardFilter.close)
-      setWin(cardFilter.win)
-      setBank(cardFilter.bank)
+    if(card){
+      setName(card.name)
+      setLimit(card.limit)
+      setClose(card.close)
+      setWin(card.win)
+      setBank(card.bank)
     }
 
-  }, [cardFilter])
+  }, [card])
 
   function validate(){
     Keyboard.dismiss()
@@ -76,8 +76,8 @@ export default function RegisterCard({ route, navigation }){
       bank
     }
 
-    if(cardFilter){
-      dispatch(updateCard(data, cardFilter.id))
+    if(card){
+      dispatch(updateCard(data, card.id))
       navigation.navigate("Card")
     }else {     
       dispatch(registerCards(data))     
@@ -147,7 +147,7 @@ export default function RegisterCard({ route, navigation }){
         />
 
         <TouchableOpacity style={styles.button} onPress={() => validate()}>
-        <Text style={styles.textButton}>{cardFilter ? "Atualizar" : "Adicionar"}</Text>
+        <Text style={styles.textButton}>{card ? "Atualizar" : "Adicionar"}</Text>
       </TouchableOpacity>
     </View>    
     </TouchableWithoutFeedback>
