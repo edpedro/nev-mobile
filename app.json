@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#058373"
-      }
+      },
+      "package": "com.edp2013.nevcontrol"
     },
     "web": {
       "favicon": "./assets/favicon.png"

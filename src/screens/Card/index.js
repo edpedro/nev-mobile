@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { AntDesign } from '@expo/vector-icons'; 
 
@@ -9,15 +9,22 @@ import CardComponent from '../../Components/CardComponent'
 import TransComponent from '../../Components/TransComponent'
 import ButtonAddCard from '../../Components/ButtonAddCard';
 
+import { getCards } from '../../store/modules/creditCard/actions'
+import { getTransactions } from '../../store/modules/transaction/actions'
+
 import styles from './styles'
 
 export default function Card({ navigation }) {
   const { cards } = useSelector((state) => state.creditCards)
   const { trans: { transactions } } = useSelector((state) => state.transactions)
 
+  const dispatch = useDispatch()
+
   const [filterCards, setFilterCards] = useState("")  
 
   useEffect(() => {
+    dispatch(getCards())
+    dispatch(getTransactions())
     FilterCard()   
   },[])
 
