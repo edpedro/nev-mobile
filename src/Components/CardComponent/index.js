@@ -2,10 +2,9 @@ import { Text, View, TouchableOpacity } from "react-native";
 
 import styles from './styles'
 
-import ButtonAddCard from '../ButtonAddCard'
 
 export default function CardComponent({ creditCards, navigation }){ 
-  const { id, bank, close, win, limit, cardBalance } = creditCards  
+  const { id, bank, close, win, limit, cardBalance, name } = creditCards  
   
   return (   
       <View style={styles.container}>
@@ -37,7 +36,10 @@ export default function CardComponent({ creditCards, navigation }){
               id
             })          
           }}>
-            <Text style={styles.viewInvoiceText}>ver fatura</Text>
+            <View style={styles.viewBottom}>
+              <Text style={styles.viewInvoiceText}>ver fatura</Text>
+              <Text style={styles.viewInvoiceTextName}>{name}</Text>
+            </View>            
         </TouchableOpacity>
       </View>   
   )

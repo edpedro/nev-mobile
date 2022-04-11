@@ -66,6 +66,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color:"#fff",
   },
+  viewInvoiceTextName: {  
+    color:"#fff",
+    marginRight: 6
+  },
+  viewBottom: {
+    flexDirection: "row",
+    justifyContent: "space-between"
+  }
 })
 
 export default styles
