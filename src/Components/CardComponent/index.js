@@ -31,16 +31,16 @@ export default function CardComponent({ creditCards, navigation }){
             }).format(limit - cardBalance)}</Text>     
           </View>
         </View>
-        <TouchableOpacity style={styles.viewInvoice} onPress={() => {
-            navigation.navigate('DetailCard', {
-              id
-            })          
-          }}>
-            <View style={styles.viewBottom}>
+        <View style={styles.viewBottom}>
+          <TouchableOpacity style={styles.viewInvoice} onPress={() => {
+              navigation.navigate('DetailCard', {
+                id
+              })          
+            }}>            
               <Text style={styles.viewInvoiceText}>ver fatura</Text>
-              <Text style={styles.viewInvoiceTextName}>{name}</Text>
-            </View>            
-        </TouchableOpacity>
+          </TouchableOpacity>
+          <Text style={styles.viewInvoiceTextName}>{name}</Text>
+        </View> 
       </View>   
   )
 }
