@@ -9,7 +9,10 @@ import { registerCards, updateCard } from '../../store/modules/creditCard/action
 
 import styles from './styles'
 
-const banks = ["Itau", "Santander", "Nubank", "Inter", "Bradesco", "Visa", "Mastercard", "Hipercard"]
+const banks = ["Itau", "Santander", "Nubank", "Inter", "Bradesco", "Visa", 
+"Mastercard", "Hipercard", "PicPay", "Original", "Banco PAN", "Caixa", "digio",
+"Neon", "Mercado Pago", "Banco BV", "Bmg", "C6 Bank", "Next", "Ame Digital", "BTG Banking", "PagBank"]
+
 const days = ["01","02","03","04","05","06","07","08","09","10","11",
 "12", "13","14","15","16","17","18","19","20","21","22","23","24","25",
 "26","27","28","29","30","31", "32"]
