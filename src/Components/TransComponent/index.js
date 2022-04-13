@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import moment from 'moment'
 
-import { FontAwesome, Entypo  } from '@expo/vector-icons';
+import { FontAwesome, Entypo, Feather  } from '@expo/vector-icons';
 
 import styles from './styles'
 
@@ -17,7 +17,13 @@ export default function TransComponent({ invoceCreditCard, navigation }){
         }}>
       <View style={styles.container}>      
           <View style={styles.iconCardCircle}>
-          <FontAwesome name="credit-card" size={18} color="black" />
+            {operation === "conta" 
+              ?
+              <Feather name="shopping-bag" size={19} color="black" />
+
+              :
+              <FontAwesome name="credit-card" size={18} color="black" />
+            }     
           </View>
         
           <View style={styles.content}>
@@ -31,6 +37,7 @@ export default function TransComponent({ invoceCreditCard, navigation }){
     
           <View style={styles.circle}>
           <Entypo name="circle" size={12} color={type === "despesa" ? "red" : "#058373"} />
+          {/* <Entypo name="home" size={12} color={type === "despesa" ? "red" : "#058373"} /> */}
           </View>
     
         
