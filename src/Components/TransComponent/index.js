@@ -36,8 +36,7 @@ export default function TransComponent({ invoceCreditCard, navigation }){
           </View>
     
           <View style={styles.circle}>
-          <Entypo name="circle" size={12} color={type === "despesa" ? "red" : "#058373"} />
-          {/* <Entypo name="home" size={12} color={type === "despesa" ? "red" : "#058373"} /> */}
+          <Entypo name="circle" size={12} color={type === "despesa" ? "red" : "#058373"} />         
           </View>
     
         

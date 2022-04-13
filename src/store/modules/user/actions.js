@@ -18,3 +18,6 @@ export function logout() {
 export function logoutSucess() {
   return { type: types.LOGOUT_SUCCESS }
 }
+export function hideBalance(payload) {
+  return { type: types.HIDE_BALANCE, payload }
+}

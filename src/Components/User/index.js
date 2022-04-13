@@ -1,19 +1,28 @@
-import { View, Text, Image } from 'react-native'
-import { MaterialIcons } from '@expo/vector-icons';
-import { useSelector } from 'react-redux'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { Ionicons } from '@expo/vector-icons';
+import { useSelector, useDispatch } from 'react-redux'
 
 import styles from './styles'
 
 import userLogo from '../../assets/user.png'
 
+import { hideBalance } from '../../store/modules/user/actions'
+
+
 export default function User(){
-  const { user } = useSelector((state) => state.users)
+  const { user, hideBal } = useSelector((state) => state.users)
+
+  const dispatch =  useDispatch()
 
   const data = new Date
   const curretData = 
   String(data.getDate()).padStart(2, '0') 
   + '/' + 
   String(data.getMonth() + 1).padStart(2, '0')
+
+  function handleHideBalance(){
+    dispatch(hideBalance(!hideBal))
+  }
 
   return (
     <View style={styles.container}>
@@ -27,8 +36,9 @@ export default function User(){
           </Text>
         </View>        
       </View>
-
-      <MaterialIcons name="add-alert" style={{marginRight: 10}} size={34} color="#fff" />
+      <TouchableOpacity onPress={handleHideBalance}>       
+        <Ionicons name={hideBal ? "eye" : "eye-off"} style={{marginRight: 40}} size={34} color="#fff" />
+      </TouchableOpacity>      
     </View>
   ) 
 }
