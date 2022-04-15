@@ -9,6 +9,7 @@ import Balance from '../../Components/Balance';
 import CardComponent from '../../Components/CardComponent';
 import TransComponent from '../../Components/TransComponent'
 import ButtonAddCard from '../../Components/ButtonAddCard';
+import BalanceCard from '../../Components/BalanceCard';
 
 import { getCards } from '../../store/modules/creditCard/actions'
 import { getTransactions } from '../../store/modules/transaction/actions'
@@ -33,8 +34,9 @@ export default function Home({ navigation }) {
       <User />
       <Balance data={balance}/>
       <View style={styles.content}>
-        <Text style={styles.cardTitle}>Cartão de credito</Text>
+        <Text style={styles.cardTitle}>Cartão de Crédito</Text>
         <View style={styles.card}>
+          <BalanceCard />
           {cards && cards.length > 0
             ?
             <FlatList         

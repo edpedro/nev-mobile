@@ -8,21 +8,18 @@ import User from '../../Components/User'
 import CardComponent from '../../Components/CardComponent'
 import TransComponent from '../../Components/TransComponent'
 import ButtonAddCard from '../../Components/ButtonAddCard';
+import BalanceCard from '../../Components/BalanceCard';
 
 import { getCards } from '../../store/modules/creditCard/actions'
 import { getTransactions } from '../../store/modules/transaction/actions'
 
 import styles from './styles'
 
-export default function Card({ navigation, route }) {
+export default function Card({ navigation }) {
   const { cards } = useSelector((state) => state.creditCards)
   const { transCard: { result } } = useSelector((state) => state.transactions)
 
   const dispatch = useDispatch()
-
-  const name = route.name || {};
-
-  const [filterCards, setFilterCards] = useState("")  
 
   useEffect(() => {
     dispatch(getCards())
@@ -34,7 +31,7 @@ export default function Card({ navigation, route }) {
      <View style={styles.user}>
        <User />
        <View style={styles.title}>
-         <Text style={styles.titleName}>Cartão de credito</Text>
+         <Text style={styles.titleName}>Cartão de Crédito</Text>
          <TouchableOpacity style={styles.tabItemCenter} onPress={() => navigation.navigate("RegisterCard")}>  
             <AntDesign name="pluscircle" size={40} color="white" />     
          </TouchableOpacity >      
@@ -42,6 +39,7 @@ export default function Card({ navigation, route }) {
      </View>
      <View style={styles.content}>
         <View style={styles.card}>
+          <BalanceCard />
         {cards && cards.length > 0
             ?
             <FlatList         
