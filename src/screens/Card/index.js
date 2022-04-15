@@ -39,19 +39,22 @@ export default function Card({ navigation }) {
      </View>
      <View style={styles.content}>
         <View style={styles.card}>
-          <BalanceCard />
+          
         {cards && cards.length > 0
             ?
-            <FlatList         
-            data={cards}
-            renderItem={({item}) => (         
-              <CardComponent creditCards={item} navigation={navigation}/>
-            )}
-            horizontal={true}
-            scrollEnabled
-            showsHorizontalScrollIndicator={false}          
-            keyExtractor={item => item.id}
-          />        
+            <>
+              <BalanceCard />
+              <FlatList         
+              data={cards}
+              renderItem={({item}) => (         
+                <CardComponent creditCards={item} navigation={navigation}/>
+              )}
+              horizontal={true}
+              scrollEnabled
+              showsHorizontalScrollIndicator={false}          
+              keyExtractor={item => item.id}
+              />        
+            </>           
             :
               <ButtonAddCard />
           }          

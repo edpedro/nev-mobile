@@ -20,7 +20,8 @@ export default function Balance({ route, data }){
         >Receita</Text>
         <Text 
         style={[styles.incomeValue, {color: route === 'Transaction'? "#fff": "#000"}]}
-        >{data && data.accountBalance}</Text>
+        >{data && data.accountBalance}        
+        </Text>
       </View>
       <View style={[styles.expense, 
         {backgroundColor: route === 'Transaction'? "#058373": "#fff",

@@ -35,20 +35,22 @@ export default function Home({ navigation }) {
       <Balance data={balance}/>
       <View style={styles.content}>
         <Text style={styles.cardTitle}>Cartão de Crédito</Text>
-        <View style={styles.card}>
-          <BalanceCard />
+        <View style={styles.card}>          
           {cards && cards.length > 0
             ?
-            <FlatList         
-            data={cards}
-            renderItem={({item}) => (         
-              <CardComponent creditCards={item} navigation={navigation}/>
-            )}
-            horizontal={true}
-            scrollEnabled
-            showsHorizontalScrollIndicator={false}          
-            keyExtractor={item => item.id}
-          />        
+            <>
+              <BalanceCard />
+              <FlatList         
+              data={cards}
+              renderItem={({item}) => (         
+                <CardComponent creditCards={item} navigation={navigation}/>
+              )}
+              horizontal={true}
+              scrollEnabled
+              showsHorizontalScrollIndicator={false}          
+              keyExtractor={item => item.id}
+              />     
+            </>   
             :
               <ButtonAddCard />
           }

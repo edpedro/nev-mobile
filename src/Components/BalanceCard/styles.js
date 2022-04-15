@@ -22,7 +22,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 10
   },
-  balanceCardValue:{},
+  balanceCardValue:{
+    fontSize: 12,   
+  },
   expenseCard: {
     borderWidth: 1,
     borderRadius: 5,
@@ -37,6 +39,9 @@ const styles = StyleSheet.create({
   expenseCardName:{
     fontWeight: "bold",
     fontSize: 10
+  },
+  expenseCardValue:{
+    fontSize: 12, 
   }
 });
 
