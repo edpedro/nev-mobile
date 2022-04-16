@@ -93,16 +93,18 @@ export default function RegisterRelease({ route }){
 
   function handleSubmit(){  
     const newDate = moment(data).format("YYYY-MM-DD")
+    const newValue = handleNumberCommas(value)
 
     const dataForm = {
       description,
-      value,
+      value: newValue,
       data: newDate,
       category,
       operation,
       type,
       creditCard
     }
+    console.log(dataForm)
     if(!showTrans){
       dispatch(registerTransaction(dataForm))
     }else{
@@ -159,6 +161,14 @@ export default function RegisterRelease({ route }){
     setCardName(banks)
   }
 
+
+  function handleNumberCommas(value){
+    let parts = value.toString().split(",");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return parts.join(".");
+  }
+  
+  
   return (
     <KeyboardAvoidingView 
     behavior={Platform.OS === "ios" ? "padding" : "height"}   
