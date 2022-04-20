@@ -15,29 +15,34 @@ export default function TransComponent({ invoceCreditCard, navigation }){
             id
           })          
         }}>
-      <View style={styles.container}>      
-          <View style={styles.iconCardCircle}>
-            {operation === "conta" 
-              ?
-              <Feather name="shopping-bag" size={19} color="black" />
+      <View style={styles.container}>     
+        <View style={styles.content}>        
+          <View style={styles.contentBody}>
+              <View style={styles.iconCardCircle}>
+                {operation === "conta" 
+                  ?
+                  <Feather name="shopping-bag" size={19} color="black" />
 
-              :
-              <FontAwesome name="credit-card" size={18} color="black" />
-            }     
-          </View>
-        
-          <View style={styles.content}>
-            <Text style={styles.contentTitle}>{category}</Text>
-            <View style={styles.contentData}>
-              <Text>{moment(data).format('MMM DD-YYYY')}</Text>
-              <View style={styles.contentCircle}></View>
-              <Text>{operation}</Text>
-            </View>       
-          </View>
+                  :
+                  <FontAwesome name="credit-card" size={18} color="black" />
+                }     
+              </View>
+              
+              <View>
+                <Text style={styles.contentTitle}>{category}</Text>
+                <View style={styles.contentData}>
+                  <Text>{moment(data).format('MMM DD-YYYY')}</Text>
+                  <View style={styles.contentCircle}></View>
+                  <Text>{operation}</Text>
+                </View>                
+              </View>       
+            </View>
     
           <View style={styles.circle}>
-          <Entypo name="circle" size={12} color={type === "despesa" ? "red" : "#058373"} />         
+            <Entypo name="circle" size={12} color={type === "despesa" ? "red" : "#058373"} />         
           </View>
+        </View>
+          
     
         
           <Text style={styles.valueText}>

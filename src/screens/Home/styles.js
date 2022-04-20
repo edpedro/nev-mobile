@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold",
     marginLeft: 18,
-    marginTop: 30,
+    marginBottom: 5,
   },
   notRelease: {
     marginTop: 60,

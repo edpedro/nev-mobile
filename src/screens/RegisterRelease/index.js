@@ -104,7 +104,7 @@ export default function RegisterRelease({ route }){
       type,
       creditCard
     }
-    console.log(dataForm)
+    
     if(!showTrans){
       dispatch(registerTransaction(dataForm))
     }else{

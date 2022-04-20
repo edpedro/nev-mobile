@@ -1,40 +1,42 @@
 import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
-  container:{ 
-    marginTop: 20,
+  container:{
+    width: "90%",
+    marginLeft: 30,
+    marginTop: 10,
     marginBottom: 10,
     flexDirection: "row",
-    justifyContent: "space-between", 
-    alignItems: "center", 
-    margin: 30,
-  },
-  content: {
-    width: "70%",
-    flexDirection: "row",
-    justifyContent: "space-between",  
-  },
-  contentBody: {
-   flexDirection: "row",
-  },
+    justifyContent: 'space-around'
+  }, 
   iconCardCircle:{
     width: 45,
     height: 45,
     backgroundColor: '#E0E6F8',
     borderRadius: 22,
-    marginRight: 10,
     justifyContent: "center",
     alignItems: "center",    
   }, 
+  content:{      
+    flexDirection: "row",
+ 
+    width: "40%", 
+  },
+  contentBody: {
+    width: "100%",
+   
+  },
   contentTitle:{
     fontSize: 14,
     fontWeight: "bold",
     marginTop: 2
   },
   contentData:{
-    flexDirection: "row", 
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 2,
-  }, 
+  },
   contentCircle:{
     width: 6,
     height: 6,
@@ -43,14 +45,15 @@ const styles = StyleSheet.create({
     
     marginLeft: 4,
     marginRight: 4,
-    marginTop: 8
+  
   },
   circle:{    
-    marginTop: 15
+    marginLeft: 30,
+    marginRight: 30
   },
   valueText:{
-    fontWeight: "bold",
+    fontWeight: "bold"
   },
-  })
+})
 
 export default styles
