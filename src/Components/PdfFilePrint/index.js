@@ -31,7 +31,7 @@ export default function PdfFilePrint({ cardTrans, card, cardMonth }) {
      <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   </head>
   <body style="max-width: 1000px; margin: 0 auto; font-family:Roboto">
-     <p style="text-align: center; font-size: 40px; font-weight: bold; color: #058373 ">Olá, ${user.user.name[0].toUpperCase() + user.user.name.substr(1)}! Esta é a sua fatura de ${moment(filterDate).subtract(1, 'days').format('MMMM')}, no valor de 
+     <p style="text-align: center; font-size: 40px; font-weight: bold; color: #058373 ">Olá, ${user.user.name[0].toUpperCase() + user.user.name.substr(1)}! Esta é a sua fatura de ${moment(filterDate).format('MMMM')}, no valor de 
      ${Intl.NumberFormat('pt-BR', { 
       style: 'currency', 
       currency: 'BRL',
@@ -46,7 +46,7 @@ export default function PdfFilePrint({ cardTrans, card, cardMonth }) {
         <div>
           <p style="font-weight: bold;">${user.user.name[0].toUpperCase() + user.user.name.substr(1)}</p>
           <strong>Fatura</strong>
-          <span>${card.win +" "+ moment(filterDate).subtract(1, 'days').format('MMMM YYYY')}</span>        
+          <span>${card.win +" "+ moment(filterDate).format('MMMM YYYY')}</span>        
         </div>      
       </header>
       <main>
