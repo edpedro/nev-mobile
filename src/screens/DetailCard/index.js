@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import User from '../../Components/User'
 import TransComponent from '../../Components/TransComponent'
 import ModalDelete from '../../Components/ModalDeleteCard'
+import PdfFilePrint from '../../Components/PdfFilePrint'
 
 import { getCard, getCardTrans } from '../../store/modules/creditCard/actions'
 
@@ -32,7 +33,6 @@ export default function DetailCard({ route, navigation }){
     setRefreshing(false) 
   },[id, cardMonth, refreshing]) 
 
-
   return (
     <View style={styles.container}>
       <User /> 
@@ -45,7 +45,9 @@ export default function DetailCard({ route, navigation }){
         </View> 
          
         <View style={styles.filter}>
-          <SelectFilter  
+          <View>
+             <SelectFilter 
+              style={styles.filterSelect} 
               title="Data" 
               text={"Filtro por Mês"} 
               options={months}
@@ -55,12 +57,18 @@ export default function DetailCard({ route, navigation }){
                   month: item                  
                 }));             
               }}    
-          />
-          
+           />
+          </View>  
+          <View>
+            {cardTrans && cardTrans.length > 0 ?            
+              <PdfFilePrint style={styles.filterPdf}  cardTrans={cardTrans} card={card} cardMonth={cardMonth}/> 
+              :
+              null
+            }            
+          </View>      
         </View>
 
-        <Text style={styles.detailTitle}>{card.bank}</Text>
-
+        <Text style={styles.detailTitle}>{card.bank}</Text>        
         <View style={styles.detailBody}>          
           <Text style={styles.contentTitle}>{card.win} Vencimento | {card.close} Fechamento</Text>
           <View style={styles.contenInvoice}>

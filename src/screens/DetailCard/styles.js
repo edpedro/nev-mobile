@@ -26,13 +26,17 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   filter:{
-    flex: 1,
+    width: "100%",
     flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-
-    marginTop: -40,
-    marginBottom: 70
+    justifyContent: "space-between",
+    alignItems: 'center',
+    marginTop: -40,   
+  },
+  filterSelect: {
+    marginLeft: 10
+  },
+  filterPdf: {
+    marginRight: 10
   },
   detailTitle: {
     fontWeight: "bold",
