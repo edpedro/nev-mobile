@@ -21,3 +21,7 @@ export function logoutSucess() {
 export function hideBalance(payload) {
   return { type: types.HIDE_BALANCE, payload }
 }
+
+export function setImg(payload) {
+  return { type: types.SET_IMG, payload }
+}

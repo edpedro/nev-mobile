@@ -5,7 +5,8 @@ const types = {
   LOGOUT: '@user/LOGOUT',
   LOGOUT_SUCCESS: '@user/LOGOUT_SUCCESS',
   REGISTER_USER: '@user/REGISTER_USER',
-  HIDE_BALANCE: '@user/HIDE_BALANCE'
+  HIDE_BALANCE: '@user/HIDE_BALANCE',
+  SET_IMG: "@user/SET_IMG",
 }
 
 export default types

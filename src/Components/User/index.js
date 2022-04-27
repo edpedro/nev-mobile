@@ -4,13 +4,15 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import styles from './styles'
 
-import userLogo from '../../assets/user.png'
+import { FontAwesome } from '@expo/vector-icons';
 
 import { hideBalance } from '../../store/modules/user/actions'
 
+import { navigate } from '../../services/navigation'
 
-export default function User(){
-  const { user, hideBal } = useSelector((state) => state.users)
+
+export default function User({ navigation }){
+  const { user, hideBal, imgUser } = useSelector((state) => state.users)
 
   const dispatch =  useDispatch()
 
@@ -23,12 +25,20 @@ export default function User(){
   function handleHideBalance(){
     dispatch(hideBalance(!hideBal))
   }
-
+ 
   return (
     <View style={styles.container}>
       <View style={styles.contentUser}>
-        <Image source={userLogo} style={styles.logouSer}/> 
+        {imgUser && Object.keys(imgUser).length > 0 
+          ?
+          <Image source={{uri: imgUser.uri}} style={styles.logouSer}/>
 
+          :
+          <TouchableOpacity onPress={() => navigate('Acount')}>
+            <FontAwesome name="user-circle" size={40} color="#E0E6F8" style={{marginLeft: 15}}/>
+          </TouchableOpacity> 
+
+        }        
         <View style={styles.contentUserTitle}>
           <Text style={styles.UserTitleData}>{curretData}</Text>
           <Text style={styles.UserTitleName}>

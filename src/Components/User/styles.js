@@ -11,12 +11,15 @@ const styles = StyleSheet.create({
   contentUser:{
     flexDirection: "row",    
   },
-  logouSer:{
-    width: 80,
-    height: 80,
+  logouSer:{  
+    width: 40,
+    height: 40,
+    borderRadius: 20, 
+    marginLeft: 10,   
   },
   contentUserTitle:{
-    marginLeft: -10,
+    marginLeft: 10,
+    marginBottom: 20
   },
   UserTitleData:{
     fontSize: 10,

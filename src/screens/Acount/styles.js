@@ -1,3 +1,4 @@
+import { Inter_100Thin } from '@expo-google-fonts/inter';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -12,6 +13,24 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffff",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
+  },
+  contentPhoto: {
+    marginTop: 60,
+    flexDirection: "row"
+  },
+  imgUser: {
+    width: 300,
+    height: 300,
+    borderRadius: 150,
+    backgroundColor: '#E0E6F8',
+
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  logouSer: {
+    width: 300,
+    height: 300,
+    borderRadius: 150,  
   },
   exitIcon: {
     flex: 1,

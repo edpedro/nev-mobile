@@ -4,7 +4,8 @@ import produce from 'immer'
 const INITIAL_STATE = {
   user: {},
   loggedState: false,
-  hideBal: false  
+  hideBal: false,
+  imgUser: {},  
 }
 
 function users(state = INITIAL_STATE, action){
@@ -29,6 +30,11 @@ function users(state = INITIAL_STATE, action){
     case types.HIDE_BALANCE : {
       return produce(state, (draft) => {        
         draft.hideBal = action.payload
+      });
+    }
+    case types.SET_IMG : {
+      return produce(state, (draft) => {        
+        draft.imgUser = action.payload
       });
     }
     default:
